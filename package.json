@@ -2,10 +2,22 @@
   "name": "astro.garden",
   "version": "0.1.0",
   "private": true,
+  "author": {
+    "name": "Jacob McSwain",
+    "email": "jacob@mcswain.dev",
+    "url": "https://jacob.mcswain.dev/"
+  },
+  "license": "GPL-2.0-only",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/USA-RedDragon/gitreview.git"
+  },
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "start": "npm run start:dev",
+    "start:dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "npm run lint:fix -- --no-fix",
+    "lint:fix": "vue-cli-service lint"
   },
   "dependencies": {
     "core-js": "^3.6.5",
@@ -19,6 +31,7 @@
     "@vue/cli-service": "~4.5.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
+    "eslint-config-google": "^0.14.0",
     "eslint-plugin-vue": "^6.2.2",
     "vue-template-compiler": "^2.6.11"
   }
