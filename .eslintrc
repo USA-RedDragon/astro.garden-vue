@@ -14,8 +14,7 @@
       "indent": [ "error", 2, { "SwitchCase": 1 } ],
       "max-len": [ "error", 120 ],
       "no-unused-vars": [ "error", { "varsIgnorePattern": "^_", "argsIgnorePattern": "^_" } ],
-      "valid-jsdoc": "off",
-      "quotes": [ "double", 2]
+      "valid-jsdoc": "off"
   },
   "parserOptions": {
       "parser": "babel-eslint"
