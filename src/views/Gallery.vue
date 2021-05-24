@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import Photo from '../components/Photo';
+import Photo from "../components/Photo";
 export default {
   components: {
     Photo,
@@ -74,13 +74,6 @@ export default {
   column-gap: 0px;
 
   padding: 2em;
-}
-
-.photos img {
-  /* Just in case there are inline attributes */
-  width: 100% !important;
-  height: auto !important;
-  margin-bottom: 6pt;
 }
 
 @media (max-width: 2100px) {

@@ -1,12 +1,10 @@
 <template>
-  <div>
-    <img :src="src" :alt="text" />
-  </div>
+  <img :src="src" :alt="text" />
 </template>
 
 <script>
 export default {
-  name: 'Photo',
+  name: "Photo",
   props: {
     src: String,
     text: String,
@@ -19,6 +17,5 @@ export default {
   /* Just in case there are inline attributes */
   width: 100% !important;
   height: auto !important;
-  margin-bottom: 6pt;
 }
 </style>
