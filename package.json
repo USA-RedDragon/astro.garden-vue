@@ -10,7 +10,7 @@
   "license": "GPL-2.0-only",
   "repository": {
     "type": "git",
-    "url": "git://github.com/USA-RedDragon/astrobin.garden.git"
+    "url": "git://github.com/USA-RedDragon/astro.garden.git"
   },
   "scripts": {
     "start": "npm run start:dev",
