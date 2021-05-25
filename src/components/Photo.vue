@@ -1,10 +1,10 @@
 <template>
-  <div class="container_foto">
-    <div class="test">
-      <div class="ver_mas">
+  <div class="photo_container">
+    <div class="card">
+      <div class="more_info">
         <p>{{ text }}</p>
       </div>
-      <article class="text-left">
+      <article class="text-left line-height-1">
         <h2>{{ title }}</h2>
       </article>
       <img :src="src" :alt="title" />
@@ -28,18 +28,22 @@ h1 {
   color: #fcfbfa;
 }
 
-.test {
+.card {
   float: left;
   position: relative;
 }
 
-.container_foto {
+.line-height-1 {
+  line-height: 1;
+}
+
+.photo_container {
   padding: 0;
   margin: 0;
   overflow: hidden;
 }
 
-.container_foto article {
+.photo_container article {
   padding-bottom: 0%;
   padding-left: 3%;
   position: absolute;
@@ -53,13 +57,13 @@ h1 {
   width: 100%;
 }
 
-.container_foto h2 {
+.photo_container h2 {
   color: #fff;
   font-weight: 800;
   font-size: 25px;
 }
 
-.container_foto img {
+.photo_container img {
   top: 0;
   left: 0;
   width: 100% !important;
@@ -71,7 +75,7 @@ h1 {
   transition: all 4s ease;
 }
 
-.ver_mas {
+.more_info {
   background-color: #feb66c;
   position: absolute;
   width: 100%;
@@ -91,7 +95,7 @@ h1 {
   transition: all 0.4s ease-in-out;
 }
 
-.ver_mas p {
+.more_info p {
   font-size: 14px;
   color: #fff;
   position: relative;
@@ -101,11 +105,11 @@ h1 {
   line-height: 1;
 }
 
-.container_foto:hover img {
+.photo_container:hover img {
   transform: scale(1.5);
 }
 
-.container_foto:hover article {
+.photo_container:hover article {
   transform: translate(2px, -100px);
   -webkit-transform: translate(2px, -100px);
   -moz-transform: translate(2px, -100px);
@@ -118,7 +122,7 @@ h1 {
   transition: all 0.3s ease-in-out;
 }
 
-.container_foto:hover .ver_mas {
+.photo_container:hover .more_info {
   transform: translate(0px, 0px);
   -webkit-transform: translate(0px, 0px);
   -moz-transform: translate(0px, 0px);
