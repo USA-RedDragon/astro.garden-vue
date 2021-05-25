@@ -119,6 +119,13 @@ export default {
             "The Eagle Nebula (catalogued as Messier 16 or M16, and as NGC 6611, and also known as the Star Queen Nebula and The Spire) is a young open cluster of stars in the constellation Serpens, discovered by Jean-Philippe de Cheseaux in 1745–46.",
           src: require("@/assets/other-data/eagle-nebula.png"),
         },
+        {
+          title: "NGC 3324",
+          text:
+            // eslint-disable-next-line max-len
+            "NGC 3324 is an open cluster in the southern constellation Carina, located northwest of the Carina Nebula (NGC 3372) at a distance of 7,560 light-years from Earth.",
+          src: require("@/assets/other-data/NGC-3324.png"),
+        },
       ],
     };
   },
