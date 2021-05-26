@@ -126,6 +126,20 @@ export default {
             "NGC 3324 is an open cluster in the southern constellation Carina, located northwest of the Carina Nebula (NGC 3372) at a distance of 7,560 light-years from Earth.",
           src: require("@/assets/other-data/NGC-3324.png"),
         },
+        {
+          title: "IC 2948",
+          text:
+            // eslint-disable-next-line max-len
+            "IC 2944, also known as the Running Chicken Nebula or the λ Centauri Nebula, is an open cluster with an associated emission nebula found in the constellation Centaurus, near the star λ Centauri.",
+          src: require("@/assets/other-data/IC2948.png"),
+        },
+        {
+          title: "NGC 3293",
+          text:
+            // eslint-disable-next-line max-len
+            "NGC 3293 is an open cluster in the Carina constellation. It was discovered by Nicolas-Louis de Lacaille in 1751. It consists of more than 100 stars brighter than 14th magnitude in a 10 arc minute field, the brightest of which are blue supergiants.",
+          src: require("@/assets/other-data/NGC-3293.png"),
+        },
       ],
     };
   },
