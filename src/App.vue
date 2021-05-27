@@ -6,11 +6,29 @@
 </template>
 
 <script>
-import Header from './components/Header';
+import Header from "./components/Header";
 
 export default {
   components: {
     Header,
+  },
+  methods: {
+    supportsWebp: async function() {
+      if (!self.createImageBitmap) return false;
+
+      const webpData =
+        "data:image/webp;base64,UklGRh4AAABXRUJQVlA4TBEAAAAvAAAAAAfQ//73v/+BiOh/AAA=";
+      const blob = await fetch(webpData).then((r) => r.blob());
+      return createImageBitmap(blob).then(
+        () => true,
+        () => false,
+      );
+    },
+  },
+  mounted() {
+    this.supportsWebp().then((supportsWebp) => {
+      document.body.classList.add(supportsWebp ? "webp" : "no-webp");
+    });
   },
 };
 </script>
@@ -38,9 +56,16 @@ export default {
 }
 
 body {
-  background-image: url("assets/background.png");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
+}
+
+body.no-webp {
+  background-image: url("assets/background.png");
+}
+
+body.webp {
+  background-image: url("assets/background.webp");
 }
 </style>

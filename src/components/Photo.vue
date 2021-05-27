@@ -2,12 +2,24 @@
   <div class="photo_container">
     <div class="card">
       <div class="more_info">
-        <p>{{ text }}</p>
+        <p>
+          {{ text }}<br />
+          <a :href="fullResSrc">
+            <small><b>View Full Resolution</b></small>
+          </a>
+        </p>
       </div>
       <article class="text-left line-height-1">
         <h2>{{ title }}</h2>
       </article>
-      <img :src="src" :alt="title" />
+      <picture v-lazyload>
+        <img
+          src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+        />
+        <source :data-url="webpSrc" type="image/webp" />
+        <source :data-url="pngSrc" type="image/png" />
+        <img :data-url="pngSrc" :alt="title" />
+      </picture>
     </div>
   </div>
 </template>
@@ -16,9 +28,63 @@
 export default {
   name: "Photo",
   props: {
-    src: String,
+    pngSrc: String,
+    webpSrc: String,
+    fullResSrc: String,
     title: String,
     text: String,
+  },
+  directives: {
+    lazyload: (el) => {
+      function loadImage() {
+        el.removeChild(
+          Array.from(el.children).find((el) => el.nodeName === "IMG"),
+        );
+        const imageElement = Array.from(el.children).find(
+          (el) => el.nodeName === "IMG",
+        );
+        const sourceElements = Array.from(el.children).filter(
+          (el) => el.nodeName === "SOURCE",
+        );
+        if (imageElement) {
+          imageElement.addEventListener("load", () => {
+            setTimeout(() => el.classList.add("loaded"), 100);
+          });
+          imageElement.src = imageElement.dataset.url;
+        }
+        if (sourceElements) {
+          for (const sourceElement of sourceElements) {
+            sourceElement.addEventListener("load", () => {
+              setTimeout(() => el.classList.add("loaded"), 100);
+            });
+            sourceElement.srcset = sourceElement.dataset.url;
+          }
+        }
+      }
+
+      function handleIntersect(entries, observer) {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            loadImage();
+            observer.unobserve(el);
+          }
+        });
+      }
+
+      function createObserver() {
+        const options = {
+          root: el.parentElement,
+          threshold: 0,
+        };
+        const observer = new IntersectionObserver(handleIntersect, options);
+        observer.observe(el);
+      }
+      if (window["IntersectionObserver"]) {
+        createObserver();
+      } else {
+        loadImage();
+      }
+    },
   },
 };
 </script>
@@ -63,7 +129,7 @@ h1 {
   font-size: 25px;
 }
 
-.photo_container img {
+.photo_container .loaded img {
   top: 0;
   left: 0;
   width: 100% !important;
@@ -96,7 +162,7 @@ h1 {
 }
 
 .more_info p {
-  font-size: 14px;
+  font-size: 12px;
   color: #fff;
   position: relative;
   margin: 0 auto;
@@ -105,7 +171,7 @@ h1 {
   line-height: 1;
 }
 
-.photo_container:hover img {
+.photo_container:hover .loaded img {
   transform: scale(1.5);
 }
 

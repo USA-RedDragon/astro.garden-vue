@@ -6,7 +6,9 @@
       <Photo
         v-for="item in myPhotos"
         :key="item.src"
-        :src="item.src"
+        :pngSrc="item.pngSrc"
+        :webpSrc="item.webpSrc"
+        :fullResSrc="item.fullResSrc"
         :title="item.title"
         :text="item.text"
       />
@@ -16,7 +18,9 @@
       <Photo
         v-for="item in otherPhotos"
         :key="item.src"
-        :src="item.src"
+        :pngSrc="item.pngSrc"
+        :webpSrc="item.webpSrc"
+        :fullResSrc="item.fullResSrc"
         :title="item.title"
         :text="item.text"
       />
@@ -38,14 +42,18 @@ export default {
           text:
             // eslint-disable-next-line max-len
             "The Milky Way is the galaxy that contains our Solar System, with the name describing the galaxy's appearance from Earth: a hazy band of light seen in the night sky formed from stars that cannot be individually distinguished by the naked eye.",
-          src: require("@/assets/my-data/milky_way.png"),
+          pngSrc: require("@/assets/gallery/my-data/milky_way.png"),
+          webpSrc: require("@/assets/gallery/my-data/milky_way.webp"),
+          fullResSrc: require("@/assets/gallery/fullres/my-data/milky_way.png"),
         },
         {
           title: "Moon",
           text:
             // eslint-disable-next-line max-len
             "The Moon is Earth's only natural satellite. At about one-quarter the diameter of Earth (comparable to the width of Australia), it is the largest natural satellite in the Solar System relative to the size of its planet, the fifth largest satellite in the Solar System overall, and is larger than any dwarf planet.",
-          src: require("@/assets/my-data/moon.png"),
+          pngSrc: require("@/assets/gallery/my-data/moon.png"),
+          fullResSrc: require("@/assets/gallery/fullres/my-data/moon.png"),
+          webpSrc: require("@/assets/gallery/my-data/moon.webp"),
         },
       ],
       otherPhotos: [
@@ -54,91 +62,117 @@ export default {
           text:
             // eslint-disable-next-line max-len
             "Centaurus A (also known as NGC 5128 or Caldwell 77) is a galaxy in the constellation of Centaurus. It was discovered in 1826 by Scottish astronomer James Dunlop from his home in Parramatta, in New South Wales, Australia.",
-          src: require("@/assets/other-data/Centaurus_a.png"),
+          pngSrc: require("@/assets/gallery/other-data/Centaurus_a.png"),
+          fullResSrc: require("@/assets/gallery/fullres/other-data/Centaurus_a.png"),
+          webpSrc: require("@/assets/gallery/other-data/Centaurus_a.webp"),
         },
         {
           title: "Rim Nebula",
           text:
             // eslint-disable-next-line max-len
             "NGC 6188 is an emission nebula located about 4,000 light years away in the constellation Ara. The bright open cluster NGC 6193, visible to the naked eye, is responsible for a region of reflection nebulosity within NGC 6188.NGC 6188 is a star forming nebula, and is sculpted by the massive, young stars that have recently formed there",
-          src: require("@/assets/other-data/rim-nebula.png"),
+          pngSrc: require("@/assets/gallery/other-data/rim-nebula.png"),
+          fullResSrc: require("@/assets/gallery/fullres/other-data/rim-nebula.png"),
+          webpSrc: require("@/assets/gallery/other-data/rim-nebula.webp"),
         },
         {
           title: "Rosette Nebula",
           text:
             // eslint-disable-next-line max-len
             "The Rosette Nebula (also known as Caldwell 49) is an H II region located near one end of a giant molecular cloud in the Monoceros region of the Milky Way Galaxy. The open cluster NGC 2244 (Caldwell 50) is closely associated with the nebulosity, the stars of the cluster having been formed from the nebula's matter.",
-          src: require("@/assets/other-data/Rosette.png"),
+          pngSrc: require("@/assets/gallery/other-data/Rosette.png"),
+          fullResSrc: require("@/assets/gallery/fullres/other-data/Rosette.png"),
+          webpSrc: require("@/assets/gallery/other-data/Rosette.webp"),
         },
         {
           title: "Tarantula Nebula",
           text:
             // eslint-disable-next-line max-len
             "The Tarantula Nebula (also known as 30 Doradus) is an H II region in the Large Magellanic Cloud (LMC), from the Solar System's perspective forming its south-east corner. The Tarantula Nebula was observed by Nicolas-Louis de Lacaille during an expedition to the Cape of Good Hope between 1751 and 1753.",
-          src: require("@/assets/other-data/tarantula.png"),
+          pngSrc: require("@/assets/gallery/other-data/tarantula.png"),
+          fullResSrc: require("@/assets/gallery/fullres/other-data/tarantula.png"),
+          webpSrc: require("@/assets/gallery/other-data/tarantula.webp"),
         },
         {
           title: "Veil Nebula",
           text:
             // eslint-disable-next-line max-len
             "The Veil Nebula is a cloud of heated and ionized gas and dust in the constellation Cygnus. It constitutes the visible portions of the Cygnus Loop, a supernova remnant, many portions of which have acquired their own individual names and catalogue identifiers.",
-          src: require("@/assets/other-data/veil.png"),
+          pngSrc: require("@/assets/gallery/other-data/veil.png"),
+          fullResSrc: require("@/assets/gallery/fullres/other-data/veil.png"),
+          webpSrc: require("@/assets/gallery/other-data/veil.webp"),
         },
         {
           title: "Vela Supernova Remnant",
           text:
             // eslint-disable-next-line max-len
             "The Vela supernova remnant is a supernova remnant in the southern constellation Vela. Its source Type II supernova exploded approximately 11,000–12,300 years ago (and was about 800 light-years away).",
-          src: require("@/assets/other-data/vela.png"),
+          pngSrc: require("@/assets/gallery/other-data/vela.png"),
+          fullResSrc: require("@/assets/gallery/fullres/other-data/vela.png"),
+          webpSrc: require("@/assets/gallery/other-data/vela.webp"),
         },
         {
           title: "Carina Nebula",
           text:
             // eslint-disable-next-line max-len
             "The Carina Nebula or Eta Carinae Nebula (catalogued as NGC 3372; also known as the Great Carina Nebula) is a large, complex area of bright and dark nebulosity in the constellation Carina, and is located in the Carina–Sagittarius Arm.",
-          src: require("@/assets/other-data/carina-nebula.png"),
+          pngSrc: require("@/assets/gallery/other-data/carina-nebula.png"),
+          fullResSrc: require("@/assets/gallery/fullres/other-data/carina-nebula.png"),
+          webpSrc: require("@/assets/gallery/other-data/carina-nebula.webp"),
         },
         {
           title: "M22",
           text:
             // eslint-disable-next-line max-len
             "M22, also known as NGC 6656, is an elliptical globular cluster of stars in the constellation Sagittarius, near the Galactic bulge region. It is one of the brightest globulars visible in the night sky.",
-          src: require("@/assets/other-data/m22.png"),
+          pngSrc: require("@/assets/gallery/other-data/m22.png"),
+          fullResSrc: require("@/assets/gallery/fullres/other-data/m22.png"),
+          webpSrc: require("@/assets/gallery/other-data/m22.webp"),
         },
         {
           title: "Statue of Liberty Nebula",
           text:
             // eslint-disable-next-line max-len
             "NGC 3576 is a bright emission nebula in the Sagittarius arm of the galaxy a few thousand light-years away from the Eta Carinae nebula. It is also approximately 100 light years across and 9000 light-years away from Earth.",
-          src: require("@/assets/other-data/statue-of-liberty-nebula.png"),
+          pngSrc: require("@/assets/gallery/other-data/statue-of-liberty-nebula.png"),
+          fullResSrc: require("@/assets/gallery/fullres/other-data/statue-of-liberty-nebula.png"),
+          webpSrc: require("@/assets/gallery/other-data/statue-of-liberty-nebula.webp"),
         },
         {
           title: "Eagle Nebula (M16)",
           text:
             // eslint-disable-next-line max-len
             "The Eagle Nebula (catalogued as Messier 16 or M16, and as NGC 6611, and also known as the Star Queen Nebula and The Spire) is a young open cluster of stars in the constellation Serpens, discovered by Jean-Philippe de Cheseaux in 1745–46.",
-          src: require("@/assets/other-data/eagle-nebula.png"),
+          pngSrc: require("@/assets/gallery/other-data/eagle-nebula.png"),
+          fullResSrc: require("@/assets/gallery/fullres/other-data/eagle-nebula.png"),
+          webpSrc: require("@/assets/gallery/other-data/eagle-nebula.webp"),
         },
         {
           title: "NGC 3324",
           text:
             // eslint-disable-next-line max-len
             "NGC 3324 is an open cluster in the southern constellation Carina, located northwest of the Carina Nebula (NGC 3372) at a distance of 7,560 light-years from Earth.",
-          src: require("@/assets/other-data/NGC-3324.png"),
+          pngSrc: require("@/assets/gallery/other-data/NGC-3324.png"),
+          fullResSrc: require("@/assets/gallery/fullres/other-data/NGC-3324.png"),
+          webpSrc: require("@/assets/gallery/other-data/NGC-3324.webp"),
         },
         {
           title: "IC 2948",
           text:
             // eslint-disable-next-line max-len
             "IC 2944, also known as the Running Chicken Nebula or the λ Centauri Nebula, is an open cluster with an associated emission nebula found in the constellation Centaurus, near the star λ Centauri.",
-          src: require("@/assets/other-data/IC2948.png"),
+          pngSrc: require("@/assets/gallery/other-data/IC2948.png"),
+          fullResSrc: require("@/assets/gallery/fullres/other-data/IC2948.png"),
+          webpSrc: require("@/assets/gallery/other-data/IC2948.webp"),
         },
         {
           title: "NGC 3293",
           text:
             // eslint-disable-next-line max-len
             "NGC 3293 is an open cluster in the Carina constellation. It was discovered by Nicolas-Louis de Lacaille in 1751. It consists of more than 100 stars brighter than 14th magnitude in a 10 arc minute field, the brightest of which are blue supergiants.",
-          src: require("@/assets/other-data/NGC-3293.png"),
+          pngSrc: require("@/assets/gallery/other-data/NGC-3293.png"),
+          fullResSrc: require("@/assets/gallery/fullres/other-data/NGC-3293.png"),
+          webpSrc: require("@/assets/gallery/other-data/NGC-3293.webp"),
         },
       ],
     };
