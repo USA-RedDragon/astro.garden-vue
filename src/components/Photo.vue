@@ -156,6 +156,11 @@ h1 {
   font-size: 25px;
 }
 
+.photo_container img {
+  height: 80px;
+  background-color: black;
+}
+
 .photo_container .loaded img {
   top: 0;
   left: 0;
