@@ -15,7 +15,8 @@
   "scripts": {
     "start": "npm run start:dev",
     "start:dev": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "npm run build:pre && vue-cli-service build",
+    "build:pre": "node imagemin.mjs",
     "lint": "npm run lint:fix -- --no-fix",
     "lint:fix": "vue-cli-service lint"
   },
@@ -33,6 +34,12 @@
     "eslint": "^6.7.2",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-vue": "^6.2.2",
+    "glob": "^7.1.7",
+    "imagemin": "^8.0.0",
+    "imagemin-optipng": "^8.0.0",
+    "imagemin-webp": "^6.0.0",
+    "pretty-bytes": "^5.6.0",
+    "sharp": "^0.28.3",
     "vue-template-compiler": "^2.6.11"
   }
 }

@@ -62,7 +62,7 @@ body {
 }
 
 body.no-webp {
-  background-image: url("assets/background.png");
+  background-image: url("assets/background.jpg");
 }
 
 body.webp {

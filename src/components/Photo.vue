@@ -4,7 +4,7 @@
       <div class="more_info">
         <p>
           {{ text }}<br />
-          <a :href="fullResSrc">
+          <a :href="pngUrl">
             <small><b>View Full Resolution</b></small>
           </a>
         </p>
@@ -16,9 +16,9 @@
         <img
           src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
         />
-        <source :data-url="webpSrc" type="image/webp" />
-        <source :data-url="pngSrc" type="image/png" />
-        <img :data-url="pngSrc" :alt="title" />
+        <source :data-url="webpUrl" type="image/webp" />
+        <source :data-url="jpgUrl" type="image/jpeg" />
+        <img :data-url="jpgUrl" :alt="title" />
       </picture>
     </div>
   </div>
@@ -28,11 +28,38 @@
 export default {
   name: "Photo",
   props: {
-    pngSrc: String,
-    webpSrc: String,
-    fullResSrc: String,
-    title: String,
-    text: String,
+    src: {
+      type: String,
+      required: true,
+    },
+    title: {
+      type: String,
+      required: true,
+    },
+    text: {
+      type: String,
+      required: true,
+    },
+  },
+  computed: {
+    webpUrl() {
+      return (
+        `@/assets/gallery/generated/halfres/${this.src}.webp` &&
+        require(`@/assets/gallery/generated/halfres/${this.src}.webp`)
+      );
+    },
+    jpgUrl() {
+      return (
+        `@/assets/gallery/generated/halfres/${this.src}.jpg` &&
+        require(`@/assets/gallery/generated/halfres/${this.src}.jpg`)
+      );
+    },
+    pngUrl() {
+      return (
+        `@/assets/gallery/generated/fullres/${this.src}.png` &&
+        require(`@/assets/gallery/generated/fullres/${this.src}.png`)
+      );
+    },
   },
   directives: {
     lazyload: (el) => {
