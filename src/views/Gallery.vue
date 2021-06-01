@@ -47,6 +47,13 @@ export default {
             "The Moon is Earth's only natural satellite. At about one-quarter the diameter of Earth (comparable to the width of Australia), it is the largest natural satellite in the Solar System relative to the size of its planet, the fifth largest satellite in the Solar System overall, and is larger than any dwarf planet.",
           src: "my-data/moon",
         },
+        {
+          title: "M101",
+          text:
+            // eslint-disable-next-line max-len
+            "The Pinwheel Galaxy (also known as Messier 101, M101 or NGC 5457) is a face-on spiral galaxy 21 million light-years (6.4 megaparsecs) away from Earth in the constellation Ursa Major.",
+          src: "my-data/m101",
+        },
       ],
       otherPhotos: [
         {
@@ -139,6 +146,20 @@ export default {
             // eslint-disable-next-line max-len
             "NGC 3293 is an open cluster in the Carina constellation. It was discovered by Nicolas-Louis de Lacaille in 1751. It consists of more than 100 stars brighter than 14th magnitude in a 10 arc minute field, the brightest of which are blue supergiants.",
           src: "other-data/NGC-3293",
+        },
+        {
+          title: "Rho Ophiuchi",
+          text:
+            // eslint-disable-next-line max-len
+            "Rho Ophiuchi (ρ Ophiuchi) is a multiple star system in the constellation Ophiuchus. The central system has an apparent magnitude of 4.63.",
+          src: "other-data/rho",
+        },
+        {
+          title: "Hydra Cluster",
+          text:
+            // eslint-disable-next-line max-len
+            "The Hydra Cluster (or Abell 1060) is a galaxy cluster that contains 157 bright galaxies, appearing in the constellation Hydra.[4] The cluster spans about ten million light-years and has an unusually high proportion of dark matter.",
+          src: "other-data/hydra-cluster",
         },
       ],
     };
