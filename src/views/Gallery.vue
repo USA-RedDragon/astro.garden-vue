@@ -158,8 +158,15 @@ export default {
           title: "Hydra Cluster",
           text:
             // eslint-disable-next-line max-len
-            "The Hydra Cluster (or Abell 1060) is a galaxy cluster that contains 157 bright galaxies, appearing in the constellation Hydra.[4] The cluster spans about ten million light-years and has an unusually high proportion of dark matter.",
+            "The Hydra Cluster (or Abell 1060) is a galaxy cluster that contains 157 bright galaxies, appearing in the constellation Hydra. The cluster spans about ten million light-years and has an unusually high proportion of dark matter.",
           src: "other-data/hydra-cluster",
+        },
+        {
+          title: "M83",
+          text:
+            // eslint-disable-next-line max-len
+            "Messier 83 or M83, also known as the Southern Pinwheel Galaxy and NGC 5236, is a barred spiral galaxy approximately 15 million light-years away in the constellation borders of Hydra and Centaurus.",
+          src: "other-data/m83",
         },
       ],
     };
