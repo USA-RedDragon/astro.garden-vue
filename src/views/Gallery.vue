@@ -30,7 +30,7 @@ export default {
   components: {
     Photo,
   },
-  data: function() {
+  data: function () {
     return {
       myPhotos: [
         {
@@ -53,6 +53,13 @@ export default {
             // eslint-disable-next-line max-len
             "The Pinwheel Galaxy (also known as Messier 101, M101 or NGC 5457) is a face-on spiral galaxy 21 million light-years (6.4 megaparsecs) away from Earth in the constellation Ursa Major.",
           src: "my-data/m101",
+        },
+        {
+          title: "Eastern Veil Nebula (NGC 6992)",
+          text:
+            // eslint-disable-next-line max-len
+            "NGC 6992 - The Eastern Veil Nebula The Veil Nebula is a cloud of heated and ionized gas and dust in the constellation Cygnus.",
+          src: "my-data/eastern_veil",
         },
       ],
       otherPhotos: [
