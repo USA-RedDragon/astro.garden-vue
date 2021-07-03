@@ -8,9 +8,11 @@ import path from 'path';
 import fs from 'fs/promises';
 
 const origPath = '_images';
-const galleryPath = 'src/assets/gallery'
+const galleryPath = 'src/assets/gallery';
 const genFullresPath = `${galleryPath}/generated/fullres`;
 const genHalfresPath = `${galleryPath}/generated/halfres`;
+const otherDataImages = [];
+const myDataImages = [];
 
 async function mkdirP(path) {
     try {
@@ -59,7 +61,7 @@ glob(`${genFullresPath}/my-data/*.png`, async (err, matches) => {
             const size = (await fs.stat(mat)).size
             sharp(mat)
                 .metadata()
-                .then(({ width }) => {
+                .then(({ width, height }) => {
                     sharp(mat)
                         .resize(Math.round(width * 0.5))
                         .toFormat('jpeg')
@@ -79,6 +81,12 @@ glob(`${genFullresPath}/my-data/*.png`, async (err, matches) => {
                         }).catch((err) => {
                             console.error(err)
                         });
+
+                    myDataImages.push({
+                        name: `${genHalfresPath}/my-data/${path.parse(mat).name}`
+                        width: Math.round(width * 0.5),
+                        height: Math.round(height * 0.5),
+                    });
                 });
         }
     }
@@ -112,7 +120,17 @@ glob(`${genFullresPath}/other-data/*.png`, async (err, matches) => {
                         }).catch((err) => {
                             console.error(err)
                         });
+
+                    otherDataImages.push({
+                        name: `${genHalfresPath}/other-data/${path.parse(mat).name}`
+                        width: Math.round(width * 0.5),
+                        height: Math.round(height * 0.5),
+                    });
                 });
         }
     }
 });
+
+
+await fs.writeFile(`${galleryPath}/other-data.json`, otherDataImages);
+await fs.writeFile(`${galleryPath}/my-data.json`, myDataImages);
