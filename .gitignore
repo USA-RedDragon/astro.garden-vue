@@ -2,6 +2,7 @@
 node_modules
 /dist
 src/assets/gallery/generated
+sec/assets/gallery/*.json
 
 
 # local env files
