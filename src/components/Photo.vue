@@ -13,12 +13,9 @@
         <h2>{{ title }}</h2>
       </article>
       <picture v-lazyload>
-        <img
-          src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
-        />
         <source :data-url="webpUrl" type="image/webp" />
         <source :data-url="jpgUrl" type="image/jpeg" />
-        <img :data-url="jpgUrl" :alt="title" />
+        <img :src="placeholderSrc" :data-url="jpgUrl" :alt="title" />
       </picture>
     </div>
   </div>
@@ -38,6 +35,14 @@ export default {
     },
     text: {
       type: String,
+      required: true,
+    },
+    width: {
+      type: Number,
+      required: true,
+    },
+    height: {
+      type: Number,
       required: true,
     },
   },
@@ -60,6 +65,10 @@ export default {
         require(`@/assets/gallery/generated/fullres/${this.src}.png`)
       );
     },
+    placeholderSrc() {
+      return `data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg"`
+             + ` viewBox="0 0 ${this.width} ${this.height}"%3E%3C/svg%3E`
+    }
   },
   directives: {
     lazyload: (el) => {
