@@ -30,7 +30,7 @@ export default {
   components: {
     Photo,
   },
-  data: function () {
+  data: function() {
     return {
       myPhotos: [
         {
