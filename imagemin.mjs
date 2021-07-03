@@ -131,5 +131,5 @@ glob(`${genFullresPath}/other-data/*.png`, async (err, matches) => {
     }
 });
 
-await fs.writeFile(`${galleryPath}/other-data.json`, otherDataImages);
-await fs.writeFile(`${galleryPath}/my-data.json`, myDataImages);
+await fs.writeFile(`${galleryPath}/other-data.json`, JSON.stringify(otherDataImages));
+await fs.writeFile(`${galleryPath}/my-data.json`, JSON.stringify(myDataImages));
