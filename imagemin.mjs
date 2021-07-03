@@ -83,7 +83,7 @@ glob(`${genFullresPath}/my-data/*.png`, async (err, matches) => {
                         });
 
                     myDataImages.push({
-                        name: `${genHalfresPath}/my-data/${path.parse(mat).name}`
+                        name: `my-data/${path.parse(mat).name}`
                         width: Math.round(width * 0.5),
                         height: Math.round(height * 0.5),
                     });
@@ -122,7 +122,7 @@ glob(`${genFullresPath}/other-data/*.png`, async (err, matches) => {
                         });
 
                     otherDataImages.push({
-                        name: `${genHalfresPath}/other-data/${path.parse(mat).name}`
+                        name: `other-data/${path.parse(mat).name}`
                         width: Math.round(width * 0.5),
                         height: Math.round(height * 0.5),
                     });
