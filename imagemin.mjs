@@ -1,7 +1,6 @@
 import imagemin from 'imagemin';
 import imageminOptipng from 'imagemin-optipng';
 import prettyBytes from 'pretty-bytes';
-import imageminWebp from 'imagemin-webp';
 import glob from 'glob';
 import sharp from 'sharp';
 import path from 'path';
@@ -9,6 +8,7 @@ import fs from 'fs/promises';
 
 const origPath = '_images';
 const galleryPath = 'src/assets/gallery';
+const galleryJSONPath = 'public/gallery';
 const genFullresPath = `${galleryPath}/generated/fullres`;
 const genHalfresPath = `${galleryPath}/generated/halfres`;
 const otherDataImages = [];
@@ -25,6 +25,7 @@ async function mkdirP(path) {
 }
 
 await mkdirP(galleryPath)
+await mkdirP(galleryJSONPath)
 await mkdirP(`${galleryPath}/generated`)
 await mkdirP(genHalfresPath)
 await mkdirP(genFullresPath)
@@ -61,7 +62,7 @@ glob(`${genFullresPath}/my-data/*.png`, async (err, matches) => {
             const size = (await fs.stat(mat)).size
             sharp(mat)
                 .metadata()
-                .then(({ width, height }) => {
+                .then(async ({ width, height }) => {
                     sharp(mat)
                         .resize(Math.round(width * 0.5))
                         .toFormat('jpeg')
@@ -82,10 +83,18 @@ glob(`${genFullresPath}/my-data/*.png`, async (err, matches) => {
                             console.error(err)
                         });
 
+                    const imgMeta = JSON.parse(await fs.readFile(`${origPath}/my-data/${path.parse(mat).name}.json`))
+
                     myDataImages.push({
-                        name: `my-data/${path.parse(mat).name}`,
                         width: Math.round(width * 0.5),
                         height: Math.round(height * 0.5),
+                        title: imgMeta.title,
+                        text: imgMeta.text,
+                        src: `my-data/${path.parse(mat).name}`
+                    });
+
+                    await fs.writeFile(`${galleryJSONPath}/my-data.json`, JSON.stringify(myDataImages)).catch((err) => {
+                        console.error(err);
                     });
                 });
         }
@@ -100,7 +109,7 @@ glob(`${genFullresPath}/other-data/*.png`, async (err, matches) => {
             const size = (await fs.stat(mat)).size
             sharp(mat)
                 .metadata()
-                .then(({ width }) => {
+                .then(async ({ width, height }) => {
                     sharp(mat)
                         .resize(Math.round(width * 0.5))
                         .toFormat('jpeg')
@@ -120,16 +129,21 @@ glob(`${genFullresPath}/other-data/*.png`, async (err, matches) => {
                         }).catch((err) => {
                             console.error(err)
                         });
+                    
+                    const imgMeta = JSON.parse(await fs.readFile(`${origPath}/other-data/${path.parse(mat).name}.json`))
 
                     otherDataImages.push({
-                        name: `other-data/${path.parse(mat).name}`,
                         width: Math.round(width * 0.5),
                         height: Math.round(height * 0.5),
+                        title: imgMeta.title,
+                        text: imgMeta.text,
+                        src: `other-data/${path.parse(mat).name}`
+                    });
+
+                    await fs.writeFile(`${galleryJSONPath}/other-data.json`, JSON.stringify(otherDataImages)).catch((err) => {
+                        console.error(err);
                     });
                 });
         }
     }
 });
-
-await fs.writeFile(`${galleryPath}/other-data.json`, JSON.stringify(otherDataImages));
-await fs.writeFile(`${galleryPath}/my-data.json`, JSON.stringify(myDataImages));
