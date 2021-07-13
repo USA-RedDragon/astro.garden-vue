@@ -54,16 +54,11 @@ export default {
     loadImage() {
       if (this.intersected) {
         const el = this.$el.querySelector("picture");
-        el.removeChild(
-          Array.from(el.children).find(
-            (el) => el.nodeName.toUpperCase() === "SVG",
-          ),
-        );
         const imageElement = Array.from(el.children).find(
-          (el) => el.nodeName.toUpperCase() === "IMG",
+          (el) => el.nodeName.toUpperCase() === "IMG"
         );
         const sourceElements = Array.from(el.children).filter(
-          (el) => el.nodeName.toUpperCase() === "SOURCE",
+          (el) => el.nodeName.toUpperCase() === "SOURCE"
         );
         if (imageElement) {
           imageElement.addEventListener("load", () => {
@@ -85,18 +80,14 @@ export default {
   data: () => ({ observer: null, intersected: false }),
   mounted() {
     if (window["IntersectionObserver"]) {
-      this.observer = new IntersectionObserver(
-        (entries) => {
-          const image = entries[0];
-          if (image.isIntersecting) {
-            this.intersected = true;
-            this.loadImage();
-            this.observer.disconnect();
-          }
-        },
-        { rootMargin: "130% 0px 0px 0px" },
-      );
-
+      this.observer = new IntersectionObserver((entries) => {
+        const image = entries[0];
+        if (image.isIntersecting) {
+          this.intersected = true;
+          this.loadImage();
+          this.observer.disconnect();
+        }
+      });
       this.observer.observe(this.$el);
     } else {
       this.intersected = true;
@@ -174,6 +165,10 @@ h1 {
   left: 0;
   width: 100% !important;
   height: auto !important;
+}
+
+.photo_container .loaded svg {
+  display: none;
 }
 
 .photo_container .loaded img {
