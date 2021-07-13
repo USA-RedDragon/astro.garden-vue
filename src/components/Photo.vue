@@ -13,9 +13,10 @@
         <h2>{{ title }}</h2>
       </article>
       <picture v-lazyload>
-        <img
-          src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
-        />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          :viewBox="`0 0 ${this.width} ${this.height}`"
+        ></svg>
         <source :data-url="webpUrl" type="image/webp" />
         <source :data-url="jpgUrl" type="image/jpeg" />
         <img :data-url="jpgUrl" :alt="title" />
@@ -40,6 +41,61 @@ export default {
       type: String,
       required: true,
     },
+    width: {
+      type: Number,
+      required: true,
+    },
+    height: {
+      type: Number,
+      required: true,
+    },
+  },
+  methods: {
+    loadImage() {
+      if (this.intersected) {
+        const el = this.$el.querySelector("picture");
+        const imageElement = Array.from(el.children).find(
+          (el) => el.nodeName.toUpperCase() === "IMG",
+        );
+        const sourceElements = Array.from(el.children).filter(
+          (el) => el.nodeName.toUpperCase() === "SOURCE",
+        );
+        if (imageElement) {
+          imageElement.addEventListener("load", () => {
+            setTimeout(() => el.classList.add("loaded"), 100);
+          });
+          imageElement.src = imageElement.dataset.url;
+        }
+        if (sourceElements) {
+          for (const sourceElement of sourceElements) {
+            sourceElement.addEventListener("load", () => {
+              setTimeout(() => el.classList.add("loaded"), 100);
+            });
+            sourceElement.srcset = sourceElement.dataset.url;
+          }
+        }
+      }
+    },
+  },
+  data: () => ({ observer: null, intersected: false }),
+  mounted() {
+    if (window["IntersectionObserver"]) {
+      this.observer = new IntersectionObserver((entries) => {
+        const image = entries[0];
+        if (image.isIntersecting) {
+          this.intersected = true;
+          this.loadImage();
+          this.observer.disconnect();
+        }
+      });
+      this.observer.observe(this.$el);
+    } else {
+      this.intersected = true;
+      this.loadImage();
+    }
+  },
+  destroyed() {
+    this.observer.disconnect();
   },
   computed: {
     webpUrl() {
@@ -59,58 +115,6 @@ export default {
         `@/assets/gallery/generated/fullres/${this.src}.png` &&
         require(`@/assets/gallery/generated/fullres/${this.src}.png`)
       );
-    },
-  },
-  directives: {
-    lazyload: (el) => {
-      function loadImage() {
-        el.removeChild(
-          Array.from(el.children).find((el) => el.nodeName === "IMG"),
-        );
-        const imageElement = Array.from(el.children).find(
-          (el) => el.nodeName === "IMG",
-        );
-        const sourceElements = Array.from(el.children).filter(
-          (el) => el.nodeName === "SOURCE",
-        );
-        if (imageElement) {
-          imageElement.addEventListener("load", () => {
-            setTimeout(() => el.classList.add("loaded"), 100);
-          });
-          imageElement.src = imageElement.dataset.url;
-        }
-        if (sourceElements) {
-          for (const sourceElement of sourceElements) {
-            sourceElement.addEventListener("load", () => {
-              setTimeout(() => el.classList.add("loaded"), 100);
-            });
-            sourceElement.srcset = sourceElement.dataset.url;
-          }
-        }
-      }
-
-      function handleIntersect(entries, observer) {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            loadImage();
-            observer.unobserve(el);
-          }
-        });
-      }
-
-      function createObserver() {
-        const options = {
-          root: el.parentElement,
-          threshold: 0,
-        };
-        const observer = new IntersectionObserver(handleIntersect, options);
-        observer.observe(el);
-      }
-      if (window["IntersectionObserver"]) {
-        createObserver();
-      } else {
-        loadImage();
-      }
     },
   },
 };
@@ -156,9 +160,15 @@ h1 {
   font-size: 25px;
 }
 
-.photo_container img {
-  height: 80px;
-  background-color: black;
+.photo_container svg {
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: auto !important;
+}
+
+.photo_container .loaded svg {
+  display: none;
 }
 
 .photo_container .loaded img {
