@@ -35,7 +35,7 @@ export default {
   created() {
     this.getData();
   },
-  data: function () {
+  data: function() {
     return {
       myPhotos: [],
       otherPhotos: [],
