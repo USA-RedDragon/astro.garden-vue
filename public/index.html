@@ -4,6 +4,23 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+
+    <!-- SEO -->
+    <meta name="description" content="Astro Garden. Astrophotography by Jacob McSwain">
+    <meta name="author" content="Jacob McSwain">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://astro.garden/">
+    <meta property="og:title" content="Astro Garden">
+    <meta property="og:description" content="Astro Garden. Astrophotography by Jacob McSwain">
+    <meta property="og:image" content="https://astro.garden/social-media-banner.png">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://astro.garden/">
+    <meta property="twitter:title" content="Astro Garden">
+    <meta property="twitter:description" content="Astro Garden. Astrophotography by Jacob McSwain">
+    <meta property="twitter:image" content="https://astro.garden/social-media-banner.png">
+
+    <!-- Favicons -->
     <link rel="apple-touch-icon" sizes="180x180" href="<%= BASE_URL %>apple-touch-icon.png?v=309a9">
     <link rel="icon" type="image/png" sizes="32x32" href="<%= BASE_URL %>favicon-32x32.png?v=309a9">
     <link rel="icon" type="image/png" sizes="192x192" href="<%= BASE_URL %>android-chrome-192x192.png?v=309a9">
@@ -16,7 +33,6 @@
     <meta name="msapplication-TileColor" content="#101010">
     <meta name="msapplication-TileImage" content="<%= BASE_URL %>/mstile-144x144.png?v=309a9">
     <meta name="theme-color" content="#101010">
-    <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
     <noscript>
