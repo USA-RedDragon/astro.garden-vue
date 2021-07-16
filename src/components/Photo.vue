@@ -12,14 +12,14 @@
       <article class="text-left line-height-1">
         <h2>{{ title }}</h2>
       </article>
-      <picture v-lazyload>
+      <picture>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           :viewBox="`0 0 ${this.width} ${this.height}`"
         ></svg>
         <source :data-url="webpUrl" type="image/webp" />
         <source :data-url="jpgUrl" type="image/jpeg" />
-        <img :data-url="jpgUrl" :alt="title" :width="width" />
+        <img :data-url="jpgUrl" :alt="title" />
       </picture>
     </div>
   </div>
@@ -62,14 +62,14 @@ export default {
         );
         if (imageElement) {
           imageElement.addEventListener("load", () => {
-            setTimeout(() => el.classList.add("loaded"), 100);
+            this.$nextTick(() => el.classList.add("loaded"));
           });
           imageElement.src = imageElement.dataset.url;
         }
         if (sourceElements) {
           for (const sourceElement of sourceElements) {
             sourceElement.addEventListener("load", () => {
-              setTimeout(() => el.classList.add("loaded"), 100);
+              this.$nextTick(() => el.classList.add("loaded"));
             });
             sourceElement.srcset = sourceElement.dataset.url;
           }
@@ -79,20 +79,22 @@ export default {
   },
   data: () => ({ observer: null, intersected: false }),
   mounted() {
-    if (window["IntersectionObserver"]) {
-      this.observer = new IntersectionObserver((entries) => {
-        const image = entries[0];
-        if (image.isIntersecting) {
-          this.intersected = true;
-          this.loadImage();
-          this.observer.disconnect();
-        }
-      });
-      this.observer.observe(this.$el);
-    } else {
-      this.intersected = true;
-      this.loadImage();
-    }
+    this.$nextTick(() => {
+      if (window["IntersectionObserver"]) {
+        this.observer = new IntersectionObserver((entries) => {
+          const image = entries[0];
+          if (image.isIntersecting) {
+            this.intersected = true;
+            this.loadImage();
+            this.observer.disconnect();
+          }
+        });
+        this.observer.observe(this.$el);
+      } else {
+        this.intersected = true;
+        this.loadImage();
+      }
+    });
   },
   destroyed() {
     this.observer.disconnect();

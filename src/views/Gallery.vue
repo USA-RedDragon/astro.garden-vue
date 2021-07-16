@@ -9,6 +9,8 @@
         :src="item.src"
         :title="item.title"
         :text="item.text"
+        :width="item.width"
+        :height="item.height"
       />
     </section>
     <h2>Datasource: <a href="https://telescope.live">Telescope.live</a></h2>
@@ -19,6 +21,8 @@
         :src="item.src"
         :title="item.title"
         :text="item.text"
+        :width="item.width"
+        :height="item.height"
       />
     </section>
   </div>
