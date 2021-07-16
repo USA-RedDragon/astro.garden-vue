@@ -72,4 +72,8 @@ body.webp {
 p {
   font-size: 1.3em;
 }
+
+a {
+  color: #42b983;
+}
 </style>

@@ -1,8 +1,13 @@
 /* eslint-disable max-len */
 <template>
   <div class="equipment">
+    <h1>My Astrophotography Rig</h1>
+    <img
+      class="equipment_img"
+      :src="require('@/assets/about/gear.jpg')"
+      alt="Astrophotography Rig"
+    />
     <h1>Equipment</h1>
-
     <table class="styled-table">
       <tbody>
         <tr>
@@ -181,11 +186,26 @@
 </template>
 
 <style scoped>
+@media (max-width: 2100px) {
+  .styled-table {
+    font-size: 1.5em;
+  }
+}
+@media (max-width: 1200px) {
+  .styled-table {
+    font-size: 1.25em;
+  }
+}
+@media (max-width: 600px) {
+  .styled-table {
+    font-size: 1em;
+  }
+}
+
 .styled-table {
   border-collapse: collapse;
   font-family: sans-serif;
-  min-width: 400px;
-  font-size: 1.5em;
+  max-width: 85%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -194,7 +214,8 @@
   padding: 12px 15px;
 }
 
-a {
-  color: #42b983;
+.equipment_img {
+  width: 75% !important;
+  height: auto !important;
 }
 </style>

@@ -19,8 +19,5 @@
       and soon some space for a remote observatory in western Oklahoma. This is
       the only place you can view my photos at full resolution for free.
     </p>
-
-    <h2>My Astrophotography Rig</h2>
-    <img :src="require('@/assets/about/gear.jpg')" />
   </div>
 </template>
