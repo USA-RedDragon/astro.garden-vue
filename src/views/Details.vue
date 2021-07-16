@@ -2,7 +2,9 @@
   <div class="details">
     <h1>{{ imageData.title }}</h1>
     <h3>{{ imageData.text }}</h3>
-    <img class="gallery_img" :src="pngUrl" />
+    <a :href="pngUrl"
+      ><img class="gallery_img" :src="pngUrl" :alt="imageData.title"
+    /></a>
   </div>
 </template>
 
@@ -13,7 +15,7 @@ export default {
   created() {
     this.getData();
   },
-  data: function() {
+  data: function () {
     return {
       imageData: {},
     };
