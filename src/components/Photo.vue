@@ -6,7 +6,7 @@
           <p>
             {{ text }}<br />
             <a :href="pngUrl">
-              <small><b>View Full Resolution</b></small>
+              <small><b>View More Details</b></small>
             </a>
           </p>
         </div>
@@ -58,10 +58,10 @@ export default {
       if (this.intersected) {
         const el = this.$el.querySelector("picture");
         const imageElement = Array.from(el.children).find(
-          (el) => el.nodeName.toUpperCase() === "IMG",
+          (el) => el.nodeName.toUpperCase() === "IMG"
         );
         const sourceElements = Array.from(el.children).filter(
-          (el) => el.nodeName.toUpperCase() === "SOURCE",
+          (el) => el.nodeName.toUpperCase() === "SOURCE"
         );
         if (imageElement) {
           imageElement.addEventListener("load", () => {
