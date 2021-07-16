@@ -16,6 +16,7 @@ const myDataImages = [];
 
 async function mkdirP(path) {
     try {
+        console.log(`[mkdir] ${path}`)
         return await fs.mkdir(path)
     } catch (err) {
         if (err.code !== "EEXIST") {
@@ -24,8 +25,11 @@ async function mkdirP(path) {
     }
 }
 
+console.log('Creating folders')
 await mkdirP(galleryPath)
 await mkdirP(galleryJSONPath)
+await mkdirP(`${galleryJSONPath}/my-data`)
+await mkdirP(`${galleryJSONPath}/other-data`)
 await mkdirP(`${galleryPath}/generated`)
 await mkdirP(genHalfresPath)
 await mkdirP(genFullresPath)
@@ -35,6 +39,7 @@ await mkdirP(`${genFullresPath}/my-data`)
 await mkdirP(`${genFullresPath}/other-data`)
 
 // Optimize original pngs
+console.log('[My images] Optimizing PNGs')
 await imagemin([`${origPath}/my-data/*.png`], {
     destination: `${genFullresPath}/my-data`,
     plugins: [
@@ -44,6 +49,7 @@ await imagemin([`${origPath}/my-data/*.png`], {
     ]
 });
 
+console.log('[Other images] Optimizing PNGs')
 await imagemin([`${origPath}/other-data/*.png`], {
     destination: `${genFullresPath}/other-data`,
     plugins: [
@@ -54,11 +60,13 @@ await imagemin([`${origPath}/other-data/*.png`], {
 });
 
 // Reduce to 1/2 size and create jpeg + webp
+console.log('[My images] Reduce to 50% and create JPEG+WEBP thumbnails')
 glob(`${genFullresPath}/my-data/*.png`, async (err, matches) => {
     if (err) {
         console.error(err);
     } else {
         for (const mat of matches) {
+            console.log(`[My images] Modifying ${mat}`)
             const size = (await fs.stat(mat)).size
             sharp(mat)
                 .metadata()
@@ -84,13 +92,18 @@ glob(`${genFullresPath}/my-data/*.png`, async (err, matches) => {
                         });
 
                     const imgMeta = JSON.parse(await fs.readFile(`${origPath}/my-data/${path.parse(mat).name}.json`))
-
-                    myDataImages.push({
+                    const imgData = {
                         width: Math.round(width * 0.5),
                         height: Math.round(height * 0.5),
                         title: imgMeta.title,
                         text: imgMeta.text,
                         src: `my-data/${path.parse(mat).name}`
+                    };
+                    myDataImages.push(imgData);
+
+                    console.log(`[My data] Writing JSON for ${imgData.src}`)
+                    await fs.writeFile(`${galleryJSONPath}/${imgData.src}.json`, JSON.stringify(imgData)).catch((err) => {
+                        console.error(err);
                     });
 
                     await fs.writeFile(`${galleryJSONPath}/my-data.json`, JSON.stringify(myDataImages)).catch((err) => {
@@ -98,14 +111,17 @@ glob(`${genFullresPath}/my-data/*.png`, async (err, matches) => {
                     });
                 });
         }
+        
     }
 });
 
+console.log('[Other images] Reduce to 50% and create JPEG+WEBP thumbnails')
 glob(`${genFullresPath}/other-data/*.png`, async (err, matches) => {
     if (err) {
         console.error(err);
     } else {
         for (const mat of matches) {
+            console.log(`[Other images] Modifying ${mat}`)
             const size = (await fs.stat(mat)).size
             sharp(mat)
                 .metadata()
@@ -131,13 +147,18 @@ glob(`${genFullresPath}/other-data/*.png`, async (err, matches) => {
                         });
                     
                     const imgMeta = JSON.parse(await fs.readFile(`${origPath}/other-data/${path.parse(mat).name}.json`))
-
-                    otherDataImages.push({
+                    const imgData = {
                         width: Math.round(width * 0.5),
                         height: Math.round(height * 0.5),
                         title: imgMeta.title,
                         text: imgMeta.text,
                         src: `other-data/${path.parse(mat).name}`
+                    }
+                    otherDataImages.push(imgData);
+
+                    console.log(`[Other data] Writing JSON for ${imgData.src}`)
+                    await fs.writeFile(`${galleryJSONPath}/${imgData.src}.json`, JSON.stringify(imgData)).catch((err) => {
+                        console.error(err);
                     });
 
                     await fs.writeFile(`${galleryJSONPath}/other-data.json`, JSON.stringify(otherDataImages)).catch((err) => {

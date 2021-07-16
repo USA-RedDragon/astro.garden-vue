@@ -3,6 +3,7 @@ node_modules
 /dist
 src/assets/gallery/generated
 public/gallery/*.json
+public/gallery/*-data/*.json
 src/assets/gallery/*.json
 
 
