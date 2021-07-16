@@ -1,8 +1,5 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Gallery from '../views/Gallery.vue';
-import About from '../views/About.vue';
-import Details from '../views/Details.vue';
 
 Vue.use(VueRouter);
 
@@ -10,17 +7,22 @@ const routes = [
   {
     path: '/',
     name: 'Gallery',
-    component: Gallery,
+    component: () => import(/* webpackChunkName: "Gallery" */ '../views/Gallery.vue'),
   },
   {
     path: '/about',
     name: 'About',
-    component: About,
+    component: () => import(/* webpackChunkName: "About" */ '../views/About.vue'),
   },
   {
     path: '/gallery/:gallery/:image',
-    name: 'Gallery Details',
-    component: Details,
+    name: 'Gallery Image Details',
+    component: () => import(/* webpackChunkName: "GalleryDetails" */ '../views/GalleryDetails.vue'),
+  },
+  {
+    path: '/equipment',
+    name: 'Equipment',
+    component: () => import(/* webpackChunkName: "Equipment" */ '../views/Equipment.vue'),
   },
 ];
 

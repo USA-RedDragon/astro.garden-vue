@@ -15,7 +15,7 @@ export default {
   created() {
     this.getData();
   },
-  data: function () {
+  data: function() {
     return {
       imageData: {},
     };

@@ -68,4 +68,8 @@ body.no-webp {
 body.webp {
   background-image: url("assets/background.webp");
 }
+
+p {
+  font-size: 1.3em;
+}
 </style>

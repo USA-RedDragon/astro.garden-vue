@@ -7,7 +7,8 @@
     </h2>
     <div id="nav">
       <router-link to="/">Gallery</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/about">About</router-link> |
+      <router-link to="/equipment">Equipment</router-link>
     </div>
   </div>
 </template>
