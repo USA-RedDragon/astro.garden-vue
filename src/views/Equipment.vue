@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 <template>
   <div class="equipment">
     <h1>Equipment</h1>
@@ -24,14 +25,17 @@
               </li>
               <li>
                 <a
-                  href="https://www.telescope.com/Orion/Orion-Mini-50mm-Guide-Scope/rc/2160/p/99607.uts?keyword=50mm%20guide%20scope"
+                  href="https://www.telescope.com/Orion/Orion-Mini-50mm-Guide-Scope/rc/2160/p/99607.uts"
                   target="_blank"
                   >Orion Mini 50mm Guide Scope (Refractor, 162mm f/3.2)</a
                 >
               </li>
               <li>
                 <a
-                  href="https://www.nikonusa.com/en/nikon-products/product/camera-lenses/af-s-dx-nikkor-18-300mm-f%252f3.5-5.6g-ed-vr.html"
+                  :href="
+                    'https://www.nikonusa.com/en/nikon-products/product/camera-lenses/' +
+                    'af-s-dx-nikkor-18-300mm-f%252f3.5-5.6g-ed-vr.html'
+                  "
                   target="_blank"
                   >Nikon AF-S DX NIKKOR ED VR (Lens, 18-300mm f/3.5-5.6)
                 </a>
