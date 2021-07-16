@@ -1,27 +1,30 @@
 <template>
   <div class="photo_container">
-    <div class="card">
-      <div class="more_info">
-        <p>
-          {{ text }}<br />
-          <a :href="pngUrl">
-            <small><b>View Full Resolution</b></small>
-          </a>
-        </p>
+    <router-link :to="`/gallery/${this.src}`">
+      <div class="card">
+        <div class="more_info">
+          <p>
+            {{ text }}<br />
+            <a :href="pngUrl">
+              <small><b>View Full Resolution</b></small>
+            </a>
+          </p>
+        </div>
+        <article class="text-left line-height-1">
+          <h2>{{ title }}</h2>
+        </article>
+
+        <picture>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            :viewBox="`0 0 ${this.width} ${this.height}`"
+          ></svg>
+          <source :data-url="webpUrl" type="image/webp" />
+          <source :data-url="jpgUrl" type="image/jpeg" />
+          <img :data-url="jpgUrl" :alt="title" />
+        </picture>
       </div>
-      <article class="text-left line-height-1">
-        <h2>{{ title }}</h2>
-      </article>
-      <picture>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          :viewBox="`0 0 ${this.width} ${this.height}`"
-        ></svg>
-        <source :data-url="webpUrl" type="image/webp" />
-        <source :data-url="jpgUrl" type="image/jpeg" />
-        <img :data-url="jpgUrl" :alt="title" />
-      </picture>
-    </div>
+    </router-link>
   </div>
 </template>
 
