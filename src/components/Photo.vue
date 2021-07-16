@@ -19,7 +19,7 @@
         ></svg>
         <source :data-url="webpUrl" type="image/webp" />
         <source :data-url="jpgUrl" type="image/jpeg" />
-        <img :data-url="jpgUrl" :alt="title" />
+        <img :data-url="jpgUrl" :alt="title" :width="width" />
       </picture>
     </div>
   </div>
