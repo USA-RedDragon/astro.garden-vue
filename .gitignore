@@ -5,7 +5,7 @@ src/assets/gallery/generated
 public/gallery/*.json
 public/gallery/*-data/*.json
 src/assets/gallery/*.json
-
+public/sitemap.xml
 
 # local env files
 .env.local

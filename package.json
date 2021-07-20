@@ -16,7 +16,7 @@
     "start": "npm run start:dev",
     "start:dev": "vue-cli-service serve",
     "build": "npm run build:pre && vue-cli-service build",
-    "build:pre": "node imagemin.mjs",
+    "build:pre": "node scripts/imagemin.mjs && node scripts/sitemap.mjs",
     "lint": "npm run lint:fix -- --no-fix",
     "lint:fix": "vue-cli-service lint"
   },
@@ -38,8 +38,10 @@
     "glob": "^7.1.7",
     "imagemin": "^8.0.0",
     "imagemin-optipng": "^8.0.0",
+    "path-parser": "^6.1.0",
     "pretty-bytes": "^5.6.0",
     "sharp": "^0.28.3",
+    "sitemap": "^7.0.0",
     "vue-template-compiler": "^2.6.11"
   }
 }
