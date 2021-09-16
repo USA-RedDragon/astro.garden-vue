@@ -59,6 +59,13 @@
                   >Optolong L-Pro</a
                 >
               </li>
+              <li>
+                <a
+                  href="https://optcorp.com/products/radian-telescopes-2-inch-triad-ultra-filter"
+                  target="_blank"
+                  >Radian Triad Ultra Quad-Band Narrowband</a
+                >
+              </li>
             </ul>
           </td>
         </tr>
