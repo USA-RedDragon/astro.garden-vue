@@ -6,6 +6,8 @@ import sharp from 'sharp';
 import path from 'path';
 import fs from 'fs/promises';
 
+import colorutils from './colorutils.js';
+
 const origPath = '_images';
 const galleryPath = 'src/assets/gallery';
 const galleryJSONPath = 'public/gallery';
@@ -91,23 +93,28 @@ glob(`${genFullresPath}/my-data/*.png`, async (err, matches) => {
                             console.error(err)
                         });
 
-                    const imgMeta = JSON.parse(await fs.readFile(`${origPath}/my-data/${path.parse(mat).name}.json`))
-                    const imgData = {
-                        width: Math.round(width * 0.5),
-                        height: Math.round(height * 0.5),
-                        title: imgMeta.title,
-                        text: imgMeta.text,
-                        src: `my-data/${path.parse(mat).name}`
-                    };
-                    myDataImages.push(imgData);
+                    console.log(`[My images] Computing colors for ${mat}`)
+                    colorutils.quantize(mat).then(async (colors) => {
+                        const theme = colorutils.palette(colorutils.score(colors));
+                        const imgMeta = JSON.parse(await fs.readFile(`${origPath}/my-data/${path.parse(mat).name}.json`))
+                        const imgData = {
+                            width: Math.round(width * 0.5),
+                            height: Math.round(height * 0.5),
+                            title: imgMeta.title,
+                            text: imgMeta.text,
+                            src: `my-data/${path.parse(mat).name}`,
+                            theme
+                        };
+                        myDataImages.push(imgData);
 
-                    console.log(`[My data] Writing JSON for ${imgData.src}`)
-                    await fs.writeFile(`${galleryJSONPath}/${imgData.src}.json`, JSON.stringify(imgData)).catch((err) => {
-                        console.error(err);
-                    });
+                        console.log(`[My data] Writing JSON for ${imgData.src}`)
+                        await fs.writeFile(`${galleryJSONPath}/${imgData.src}.json`, JSON.stringify(imgData)).catch((err) => {
+                            console.error(err);
+                        });
 
-                    await fs.writeFile(`${galleryJSONPath}/my-data.json`, JSON.stringify(myDataImages)).catch((err) => {
-                        console.error(err);
+                        await fs.writeFile(`${galleryJSONPath}/my-data.json`, JSON.stringify(myDataImages)).catch((err) => {
+                            console.error(err);
+                        });
                     });
                 });
         }
@@ -146,25 +153,31 @@ glob(`${genFullresPath}/other-data/*.png`, async (err, matches) => {
                             console.error(err)
                         });
                     
-                    const imgMeta = JSON.parse(await fs.readFile(`${origPath}/other-data/${path.parse(mat).name}.json`))
-                    const imgData = {
-                        width: Math.round(width * 0.5),
-                        height: Math.round(height * 0.5),
-                        title: imgMeta.title,
-                        text: imgMeta.text,
-                        src: `other-data/${path.parse(mat).name}`
-                    }
-                    otherDataImages.push(imgData);
+                    console.log(`[Other images] Computing colors for ${mat}`)
+                    colorutils.quantize(mat).then(async (colors) => {
+                        const theme = colorutils.palette(colorutils.score(colors));
+                        const imgMeta = JSON.parse(await fs.readFile(`${origPath}/other-data/${path.parse(mat).name}.json`))
+                        const imgData = {
+                            width: Math.round(width * 0.5),
+                            height: Math.round(height * 0.5),
+                            title: imgMeta.title,
+                            text: imgMeta.text,
+                            src: `other-data/${path.parse(mat).name}`,
+                            theme
+                        }
+                        otherDataImages.push(imgData);
 
-                    console.log(`[Other data] Writing JSON for ${imgData.src}`)
-                    await fs.writeFile(`${galleryJSONPath}/${imgData.src}.json`, JSON.stringify(imgData)).catch((err) => {
-                        console.error(err);
-                    });
+                        console.log(`[Other data] Writing JSON for ${imgData.src}`)
+                        await fs.writeFile(`${galleryJSONPath}/${imgData.src}.json`, JSON.stringify(imgData)).catch((err) => {
+                            console.error(err);
+                        });
 
-                    await fs.writeFile(`${galleryJSONPath}/other-data.json`, JSON.stringify(otherDataImages)).catch((err) => {
-                        console.error(err);
+                        await fs.writeFile(`${galleryJSONPath}/other-data.json`, JSON.stringify(otherDataImages)).catch((err) => {
+                            console.error(err);
+                        });
                     });
                 });
         }
     }
 });
+
