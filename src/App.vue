@@ -1,16 +1,21 @@
 <template>
-  <div id="app">
-    <Header />
-    <router-view />
-  </div>
+  <span>
+    <Starfield />
+    <div id="app">
+      <Header />
+      <router-view />
+    </div>
+  </span>
 </template>
 
 <script>
 import Header from "./components/Header";
+import Starfield from "./effects/Starfield";
 
 export default {
   components: {
     Header,
+    Starfield,
   },
   methods: {
     supportsWebp: async function() {
@@ -42,6 +47,16 @@ export default {
   color: #c3c3c3;
 }
 
+html {
+  min-height: 100%;
+  position: relative;
+}
+
+body {
+  background-color: #000;
+  height: 100%;
+}
+
 #nav {
   padding: 30px;
 }
@@ -53,20 +68,6 @@ export default {
 
 #nav a.router-link-exact-active {
   color: #42b983;
-}
-
-body {
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-}
-
-body.no-webp {
-  background-image: url("assets/background.jpg");
-}
-
-body.webp {
-  background-image: url("assets/background.webp");
 }
 
 p {
