@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: "Starfield",
+  name: "StarField",
   data: function() {
     return {
       particles: [],

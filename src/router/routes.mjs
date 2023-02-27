@@ -1,38 +1,38 @@
 export default [
   {
     path: '/',
-    name: 'Gallery',
+    name: 'GalleryPage',
     sitemap: {
       changefreq: 'daily',
       priority: 1,
     },
-    component: () => import(/* webpackChunkName: "Gallery" */ '../views/Gallery.vue'),
+    component: () => import(/* webpackChunkName: "GalleryPage" */ '../views/GalleryPage.vue'),
   },
   {
     path: '/about',
-    name: 'About',
+    name: 'AboutPage',
     sitemap: {
       changefreq: 'monthly',
       priority: 0.75,
     },
-    component: () => import(/* webpackChunkName: "About" */ '../views/About.vue'),
+    component: () => import(/* webpackChunkName: "AboutPage" */ '../views/AboutPage.vue'),
   },
   {
     path: '/gallery/:gallery/:image',
-    name: 'Gallery Image Details',
+    name: 'GalleryDetailsPage',
     sitemap: {
       changefreq: 'weekly',
       priority: 0.5,
     },
-    component: () => import(/* webpackChunkName: "GalleryDetails" */ '../views/GalleryDetails.vue'),
+    component: () => import(/* webpackChunkName: "GalleryDetailsPage" */ '../views/GalleryDetailsPage.vue'),
   },
   {
     path: '/equipment',
-    name: 'Equipment',
+    name: 'EquipmentPage',
     sitemap: {
       changefreq: 'monthly',
       priority: 0.75,
     },
-    component: () => import(/* webpackChunkName: "Equipment" */ '../views/Equipment.vue'),
+    component: () => import(/* webpackChunkName: "EquipmentPage" */ '../views/EquipmentPage.vue'),
   },
 ];
