@@ -30,7 +30,7 @@
 
 <script>
 export default {
-  name: "Photo",
+  name: "GalleryPhoto",
   props: {
     src: {
       type: String,

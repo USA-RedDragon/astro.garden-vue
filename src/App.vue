@@ -1,21 +1,21 @@
 <template>
   <span>
-    <Starfield />
+    <StarField />
     <div id="app">
-      <Header />
+      <AppHeader />
       <router-view />
     </div>
   </span>
 </template>
 
 <script>
-import Header from "./components/Header";
-import Starfield from "./effects/Starfield";
+import AppHeader from "./components/AppHeader";
+import StarField from "./effects/StarField";
 
 export default {
   components: {
-    Header,
-    Starfield,
+    AppHeader,
+    StarField,
   },
   methods: {
     supportsWebp: async function() {

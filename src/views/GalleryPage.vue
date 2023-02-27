@@ -3,7 +3,7 @@
     <h1>Gallery</h1>
     <h2>Datasource: Myself</h2>
     <section class="photos">
-      <Photo
+      <GalleryPhoto
         v-for="item in myPhotos"
         :key="item.src"
         :src="item.src"
@@ -15,7 +15,7 @@
     </section>
     <h2>Datasource: <a href="https://telescope.live">Telescope.live</a></h2>
     <section class="photos">
-      <Photo
+      <GalleryPhoto
         v-for="item in otherPhotos"
         :key="item.src"
         :src="item.src"
@@ -29,12 +29,12 @@
 </template>
 
 <script>
-import Photo from "../components/Photo";
+import GalleryPhoto from "../components/GalleryPhoto";
 import axios from "axios";
 
 export default {
   components: {
-    Photo,
+    GalleryPhoto,
   },
   created() {
     this.getData();
