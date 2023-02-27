@@ -4,22 +4,208 @@ on:
   pull_request:
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
-    env:
-      NODE_ENV: production
+    permissions:
+      contents: read
+
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Use Node.js 15.x
+      - name: Use Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 15.x
+          node-version: "19.7"
+
+      - run: npm run build:ci
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: dist
+          path: dist
+          if-no-files-found: error
+          retention-days: 1
+
+  eslint:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      checks: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version-file: go.mod
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "19.7"
 
       - run: npm ci
-        env:
-          NODE_ENV: development
 
-      - run: npm run lint
-      - run: npm run build:ci
+      - name: Save Code Linting Report JSON
+        run: npm run lint:report
+
+      - name: Annotate Code Linting Results
+        if: always()
+        uses: ataylorme/eslint-annotate-action@v2
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          report-json: "eslint_report.json"
+
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: eslint-report
+          if-no-files-found: error
+          retention-days: 30
+          path: eslint_report.json
+
+  unit-tests:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      checks: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version-file: go.mod
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "19.7"
+
+      - run: npm ci
+
+      - run: npm run test:unit
+
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: unit-test-report
+          if-no-files-found: error
+          retention-days: 30
+          path: reports/unit
+
+      - name: Publish Test Report
+        if: always()
+        uses: mikepenz/action-junit-report@v3
+        with:
+          report_paths: "reports/unit/*.xml"
+          require_tests: true
+          check_retries: true
+          detailed_summary: true
+          fail_on_failure: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+          check_name: Unit Tests
+          job_name: Tests
+
+      - uses: codecov/codecov-action@v3
+        if: always()
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: unit
+          files: ./coverage/unit/lcov.info
+          fail_ci_if_error: true
+
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: unit-coverage
+          path: coverage/unit
+          if-no-files-found: error
+          retention-days: 30
+
+  e2e-tests:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      checks: write
+
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: ["firefox", "chrome", "electron"]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version-file: go.mod
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "19.7"
+
+      - run: npm ci
+
+      - run: test:e2e:${{ matrix.browser }}
+
+      - uses: codecov/codecov-action@v3
+        if: always()
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: e2e-${{ matrix.browser }}
+          files: ./coverage/e2e/lcov.info
+          fail_ci_if_error: true
+
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: e2e-coverage-${{ matrix.browser }}
+          path: coverage/e2e
+          if-no-files-found: error
+          retention-days: 30
+
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: e2e-test-report-${{ matrix.browser }}
+          if-no-files-found: error
+          retention-days: 30
+          path: reports/e2e
+
+      - name: Publish Test Report
+        if: always()
+        uses: mikepenz/action-junit-report@v3
+        with:
+          report_paths: "reports/e2e/*.xml"
+          require_tests: true
+          check_retries: true
+          detailed_summary: true
+          fail_on_failure: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+          check_name: E2E Tests (${{ matrix.browser }})
+          job_name: Tests
+
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: e2e-screenshots-${{ matrix.browser }}
+          path: cypress/screenshots
+          if-no-files-found: ignore
+          retention-days: 30
+
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: e2e-videos-${{ matrix.browser }}
+          path: cypress/videos
+          if-no-files-found: ignore
+          retention-days: 30
