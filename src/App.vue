@@ -1,19 +1,21 @@
 <template>
   <span>
     <StarField />
-    <div id="app">
+    <div id="main">
       <AppHeader />
-      <router-view />
+      <RouterView />
     </div>
   </span>
 </template>
 
 <script>
-import AppHeader from "./components/AppHeader";
-import StarField from "./effects/StarField";
+import { RouterView } from 'vue-router';
+import AppHeader from "./components/AppHeader.vue";
+import StarField from "./effects/StarField.vue";
 
 export default {
   components: {
+    RouterView,
     AppHeader,
     StarField,
   },
@@ -39,7 +41,7 @@ export default {
 </script>
 
 <style>
-#app {
+#main {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

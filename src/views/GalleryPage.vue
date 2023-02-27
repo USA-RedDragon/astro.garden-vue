@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import GalleryPhoto from "../components/GalleryPhoto";
+import GalleryPhoto from "../components/GalleryPhoto.vue";
 import axios from "axios";
 
 export default {

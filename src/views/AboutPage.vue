@@ -7,7 +7,7 @@
       <source :srcset="require('@/assets/me.png')" type="image/png" />
       <img
         style="width: 20%; border-radius: 16rem"
-        src="assets/me.png"
+        :src="require('@/assets/me.png')"
         alt="Me, Jacob McSwain"
       />
     </picture>
