@@ -6,12 +6,37 @@
       ><img class="gallery_img" :src="pngUrl" :alt="imageData.title"
     /></a>
     <table :style="'display: ' + (this.paletteVisible ? 'inline':'none')">
-        <tr v-for="(item, index) in this.imageData.theme.a1">
-            <td :style="'background-color: ' + imageData.theme.a1[index] + '; color:' + (index > 7 ? '#ffffff':'#000000')">{{ imageData.theme.a1[index] }}</td>
-            <td :style="'background-color: ' + imageData.theme.a2[index] + '; color:' + (index > 7 ? '#ffffff':'#000000')">{{ imageData.theme.a2[index] }}</td>
-            <td :style="'background-color: ' + imageData.theme.a3[index] + '; color:' + (index > 7 ? '#ffffff':'#000000')">{{ imageData.theme.a3[index] }}</td>
-            <td :style="'background-color: ' + imageData.theme.n1[index] + '; color:' + (index > 7 ? '#ffffff':'#000000')">{{ imageData.theme.n1[index] }}</td>
-            <td :style="'background-color: ' + imageData.theme.n2[index] + '; color:' + (index > 7 ? '#ffffff':'#000000')">{{ imageData.theme.n2[index] }}</td>
+        <tr v-bind:key="index" v-for="(item, index) in this.imageData.theme.a1">
+            <td
+              :style="
+                'background-color: ' + imageData.theme.a1[index] + ';' +
+                'color:' + (index > 7 ? '#ffffff':'#000000')">
+                {{ imageData.theme.a1[index] }}
+            </td>
+            <td
+              :style="
+                'background-color: ' + imageData.theme.a2[index] + ';' +
+                'color:' + (index > 7 ? '#ffffff':'#000000')">
+                {{ imageData.theme.a2[index] }}
+            </td>
+            <td
+              :style="
+                'background-color: ' + imageData.theme.a3[index] + ';' +
+                'color:' + (index > 7 ? '#ffffff':'#000000')">
+                {{ imageData.theme.a3[index] }}
+            </td>
+            <td
+              :style="
+                'background-color: ' + imageData.theme.n1[index] + ';' +
+                'color:' + (index > 7 ? '#ffffff':'#000000')">
+                {{ imageData.theme.n1[index] }}
+            </td>
+            <td
+              :style="
+                'background-color: ' + imageData.theme.n2[index] + ';' +
+                'color:' + (index > 7 ? '#ffffff':'#000000')">
+                {{ imageData.theme.n2[index] }}
+            </td>
         </tr>
     </table>
   </div>
@@ -48,11 +73,11 @@ export default {
         console.error(error);
       }
     },
-    handleKeyDown (e) {
-        console.log(e);
-        if(e.key === 'p'){
-            this.$nextTick(()=>this.paletteVisible = !this.paletteVisible);
-        }
+    handleKeyDown(e) {
+      console.log(e);
+      if (e.key === 'p') {
+        this.$nextTick(()=>this.paletteVisible = !this.paletteVisible);
+      }
     },
   },
 };
