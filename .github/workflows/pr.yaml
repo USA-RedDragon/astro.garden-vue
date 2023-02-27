@@ -18,6 +18,8 @@ jobs:
         with:
           node-version: "19.7"
 
+      - run: npm ci
+
       - run: npm run build:ci
 
       - uses: actions/upload-artifact@v3
