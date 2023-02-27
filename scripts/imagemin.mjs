@@ -9,8 +9,7 @@ import fs from 'fs/promises';
 import colorutils from './colorutils.js';
 
 const origPath = '_images';
-const galleryPath = 'src/assets/gallery';
-const galleryJSONPath = 'public/gallery';
+const galleryPath = 'public/gallery';
 const genFullresPath = `${galleryPath}/generated/fullres`;
 const genHalfresPath = `${galleryPath}/generated/halfres`;
 const otherDataImages = [];
@@ -29,9 +28,8 @@ async function mkdirP(path) {
 
 console.log('Creating folders')
 await mkdirP(galleryPath)
-await mkdirP(galleryJSONPath)
-await mkdirP(`${galleryJSONPath}/my-data`)
-await mkdirP(`${galleryJSONPath}/other-data`)
+await mkdirP(`${galleryPath}/my-data`)
+await mkdirP(`${galleryPath}/other-data`)
 await mkdirP(`${galleryPath}/generated`)
 await mkdirP(genHalfresPath)
 await mkdirP(genFullresPath)
@@ -108,17 +106,17 @@ glob(`${genFullresPath}/my-data/*.png`, async (err, matches) => {
                         myDataImages.push(imgData);
 
                         console.log(`[My data] Writing JSON for ${imgData.src}`)
-                        await fs.writeFile(`${galleryJSONPath}/${imgData.src}.json`, JSON.stringify(imgData)).catch((err) => {
+                        await fs.writeFile(`${galleryPath}/${imgData.src}.json`, JSON.stringify(imgData)).catch((err) => {
                             console.error(err);
                         });
 
-                        await fs.writeFile(`${galleryJSONPath}/my-data.json`, JSON.stringify(myDataImages)).catch((err) => {
+                        await fs.writeFile(`${galleryPath}/my-data.json`, JSON.stringify(myDataImages)).catch((err) => {
                             console.error(err);
                         });
                     });
                 });
         }
-        
+
     }
 });
 
@@ -152,7 +150,7 @@ glob(`${genFullresPath}/other-data/*.png`, async (err, matches) => {
                         }).catch((err) => {
                             console.error(err)
                         });
-                    
+
                     console.log(`[Other images] Computing colors for ${mat}`)
                     colorutils.quantize(mat).then(async (colors) => {
                         const theme = colorutils.palette(colorutils.score(colors));
@@ -168,11 +166,11 @@ glob(`${genFullresPath}/other-data/*.png`, async (err, matches) => {
                         otherDataImages.push(imgData);
 
                         console.log(`[Other data] Writing JSON for ${imgData.src}`)
-                        await fs.writeFile(`${galleryJSONPath}/${imgData.src}.json`, JSON.stringify(imgData)).catch((err) => {
+                        await fs.writeFile(`${galleryPath}/${imgData.src}.json`, JSON.stringify(imgData)).catch((err) => {
                             console.error(err);
                         });
 
-                        await fs.writeFile(`${galleryJSONPath}/other-data.json`, JSON.stringify(otherDataImages)).catch((err) => {
+                        await fs.writeFile(`${galleryPath}/other-data.json`, JSON.stringify(otherDataImages)).catch((err) => {
                             console.error(err);
                         });
                     });
@@ -180,4 +178,3 @@ glob(`${genFullresPath}/other-data/*.png`, async (err, matches) => {
         }
     }
 });
-

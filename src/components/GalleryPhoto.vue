@@ -105,22 +105,13 @@ export default {
   },
   computed: {
     webpUrl() {
-      return (
-        `@/assets/gallery/generated/halfres/${this.src}.webp` &&
-        require(`@/assets/gallery/generated/halfres/${this.src}.webp`)
-      );
+      return `/gallery/generated/halfres/${this.src}.webp`
     },
     jpgUrl() {
-      return (
-        `@/assets/gallery/generated/halfres/${this.src}.jpg` &&
-        require(`@/assets/gallery/generated/halfres/${this.src}.jpg`)
-      );
+      return `/gallery/generated/halfres/${this.src}.jpg`
     },
     pngUrl() {
-      return (
-        `@/assets/gallery/generated/fullres/${this.src}.png` &&
-        require(`@/assets/gallery/generated/fullres/${this.src}.png`)
-      );
+      return `/gallery/generated/fullres/${this.src}.png`
     },
   },
 };

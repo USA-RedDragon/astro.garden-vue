@@ -58,10 +58,7 @@ export default {
   },
   computed: {
     pngUrl() {
-      return (
-        `@/assets/gallery/generated/fullres/${this.$route.params.gallery}/${this.$route.params.image}.png` &&
-        require(`@/assets/gallery/generated/fullres/${this.$route.params.gallery}/${this.$route.params.image}.png`)
-      );
+      return `/gallery/generated/fullres/${this.$route.params.gallery}/${this.$route.params.image}.png`;
     },
   },
   methods: {

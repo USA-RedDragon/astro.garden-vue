@@ -3,11 +3,11 @@
     <h1>About Me</h1>
 
     <picture class="rounded img-responsive" style="width: 100%">
-      <source :srcset="require('@/assets/me.webp')" type="image/webp" />
-      <source :srcset="require('@/assets/me.png')" type="image/png" />
+      <source :srcset="meWebp" type="image/webp" />
+      <source :srcset="mePng" type="image/png" />
       <img
         style="width: 20%; border-radius: 16rem"
-        :src="require('@/assets/me.png')"
+        :src="mePng"
         alt="Me, Jacob McSwain"
       />
     </picture>
@@ -21,3 +21,7 @@
     </p>
   </div>
 </template>
+<script setup>
+import meWebp from '@/assets/me.webp';
+import mePng from '@/assets/me.png';
+</script>

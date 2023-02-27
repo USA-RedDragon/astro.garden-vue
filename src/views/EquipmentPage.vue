@@ -4,7 +4,7 @@
     <h1>My Astrophotography Rig</h1>
     <img
       class="equipment_img"
-      :src="require('@/assets/about/gear.jpg')"
+      :src="gearJpg"
       alt="Astrophotography Rig"
     />
     <h1>Equipment</h1>
@@ -191,6 +191,10 @@
     </table>
   </div>
 </template>
+
+<script setup>
+import gearJpg from '@/assets/about/gear.jpg';
+</script>
 
 <style scoped>
 @media (max-width: 2100px) {

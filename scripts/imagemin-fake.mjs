@@ -13,8 +13,7 @@ import fs from 'fs/promises';
 import colorutils from './colorutils.js';
 
 const origPath = '_images';
-const galleryPath = 'src/assets/gallery';
-const galleryJSONPath = 'public/gallery';
+const galleryPath = 'public/gallery';
 const genFullresPath = `${galleryPath}/generated/fullres`;
 const genHalfresPath = `${galleryPath}/generated/halfres`;
 const otherDataImages = [];
@@ -33,9 +32,8 @@ async function mkdirP(path) {
 
 console.log('Creating folders')
 await mkdirP(galleryPath)
-await mkdirP(galleryJSONPath)
-await mkdirP(`${galleryJSONPath}/my-data`)
-await mkdirP(`${galleryJSONPath}/other-data`)
+await mkdirP(`${galleryPath}/my-data`)
+await mkdirP(`${galleryPath}/other-data`)
 await mkdirP(`${galleryPath}/generated`)
 await mkdirP(genHalfresPath)
 await mkdirP(genFullresPath)
@@ -85,8 +83,8 @@ await myPngFiles.forEach(async (pngFile) => {
     myDataImages.push(imgData);
 
     console.log(`[My data] Writing JSON for ${imgData.src}`)
-    await fs.writeFile(`${galleryJSONPath}/${imgData.src}.json`, JSON.stringify(imgData))
-    await fs.writeFile(`${galleryJSONPath}/my-data.json`, JSON.stringify(myDataImages))
+    await fs.writeFile(`${galleryPath}/${imgData.src}.json`, JSON.stringify(imgData))
+    await fs.writeFile(`${galleryPath}/my-data.json`, JSON.stringify(myDataImages))
 });
 
 console.log('[Other images] Faking halfres')
@@ -124,6 +122,6 @@ await otherPngFiles.forEach(async (pngFile) => {
     otherDataImages.push(imgData);
 
     console.log(`[Other data] Writing JSON for ${imgData.src}`)
-    await fs.writeFile(`${galleryJSONPath}/${imgData.src}.json`, JSON.stringify(imgData))
-    await fs.writeFile(`${galleryJSONPath}/other-data.json`, JSON.stringify(otherDataImages))
+    await fs.writeFile(`${galleryPath}/${imgData.src}.json`, JSON.stringify(imgData))
+    await fs.writeFile(`${galleryPath}/other-data.json`, JSON.stringify(otherDataImages))
 })
