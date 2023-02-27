@@ -173,6 +173,8 @@ jobs:
           path: dist
 
       - run: npm run test:e2e:${{ matrix.browser }}
+        env:
+          NODE_ENV: test
 
       - uses: codecov/codecov-action@v3
         if: always()
