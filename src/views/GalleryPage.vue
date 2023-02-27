@@ -29,8 +29,8 @@
 </template>
 
 <script>
-import GalleryPhoto from "../components/GalleryPhoto.vue";
-import axios from "axios";
+import GalleryPhoto from '../components/GalleryPhoto.vue';
+import axios from 'axios';
 
 export default {
   components: {
@@ -48,10 +48,10 @@ export default {
   methods: {
     async getData() {
       try {
-        let resp = await axios.get("gallery/my-data.json");
+        let resp = await axios.get('gallery/my-data.json');
         this.myPhotos = resp.data;
 
-        resp = await axios.get("gallery/other-data.json");
+        resp = await axios.get('gallery/other-data.json');
         this.otherPhotos = resp.data;
       } catch (error) {
         console.error(error);

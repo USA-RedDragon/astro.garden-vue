@@ -4,49 +4,49 @@
 
 <script>
 export default {
-  name: "StarField",
+  name: 'StarField',
   data: function() {
     return {
       particles: [],
-      bgColor: "#060a17",
+      bgColor: '#060a17',
       // 4:3:2
       // red:blue:yellow
       starColors: [
         {
-          center: "#cfc54a",
-          outline: "#cfaf4a",
+          center: '#cfc54a',
+          outline: '#cfaf4a',
         },
         {
-          center: "#cfc54a",
-          outline: "#cfaf4a",
+          center: '#cfc54a',
+          outline: '#cfaf4a',
         },
         {
-          center: "#86232a",
-          outline: "#721e24",
+          center: '#86232a',
+          outline: '#721e24',
         },
         {
-          center: "#86232a",
-          outline: "#721e24",
+          center: '#86232a',
+          outline: '#721e24',
         },
         {
-          center: "#86232a",
-          outline: "#721e24",
+          center: '#86232a',
+          outline: '#721e24',
         },
         {
-          center: "#86232a",
-          outline: "#721e24",
+          center: '#86232a',
+          outline: '#721e24',
         },
         {
-          center: "#9fb7ff",
-          outline: "#b3c6ff",
+          center: '#9fb7ff',
+          outline: '#b3c6ff',
         },
         {
-          center: "#9fb7ff",
-          outline: "#b3c6ff",
+          center: '#9fb7ff',
+          outline: '#b3c6ff',
         },
         {
-          center: "#9fb7ff",
-          outline: "#b3c6ff",
+          center: '#9fb7ff',
+          outline: '#b3c6ff',
         },
       ],
       maxParticles: 240,
@@ -173,7 +173,7 @@ export default {
       const heightOfSquare = Math.floor(canvas.height / this.numGridY);
 
       for (let x = 0; x < this.numGridX; x++) {
-        context.strokeStyle = "white";
+        context.strokeStyle = 'white';
         context.moveTo(widthOfSquare * x, 0);
         context.lineTo(widthOfSquare * x, canvas.height);
         context.stroke();
@@ -181,7 +181,7 @@ export default {
       }
 
       for (let y = 0; y < this.numGridY; y++) {
-        context.strokeStyle = "white";
+        context.strokeStyle = 'white';
         context.moveTo(0, heightOfSquare * y);
         context.lineTo(canvas.width, heightOfSquare * y);
         context.stroke();
@@ -194,7 +194,7 @@ export default {
     },
     animate: function() {
       const canvas = this.$refs.starfield;
-      const context = canvas.getContext("2d");
+      const context = canvas.getContext('2d');
 
       canvas.height = canvas.clientHeight;
       canvas.width = canvas.clientWidth;
@@ -238,10 +238,10 @@ export default {
     },
   },
   created() {
-    window.addEventListener("resize", this.resizeHandler);
+    window.addEventListener('resize', this.resizeHandler);
   },
-  destroyed() {
-    window.removeEventListener("resize", this.resizeHandler);
+  unmounted() {
+    window.removeEventListener('resize', this.resizeHandler);
   },
   mounted() {
     this.resizeHandler();

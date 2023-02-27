@@ -30,7 +30,7 @@
 
 <script>
 export default {
-  name: "GalleryPhoto",
+  name: 'GalleryPhoto',
   props: {
     src: {
       type: String,
@@ -56,34 +56,35 @@ export default {
   methods: {
     loadImage() {
       if (this.intersected) {
-        const el = this.$el.querySelector("picture");
+        const el = this.$el.querySelector('picture');
         const imageElement = Array.from(el.children).find(
-          (el) => el.nodeName.toUpperCase() === "IMG",
+          (el) => el.nodeName.toUpperCase() === 'IMG',
         );
         const sourceElements = Array.from(el.children).filter(
-          (el) => el.nodeName.toUpperCase() === "SOURCE",
+          (el) => el.nodeName.toUpperCase() === 'SOURCE',
         );
         if (imageElement) {
-          imageElement.addEventListener("load", () => {
-            this.$nextTick(() => el.classList.add("loaded"));
+          imageElement.addEventListener('load', () => {
+            this.$nextTick(() => el.classList.add('loaded'));
           });
           imageElement.src = imageElement.dataset.url;
         }
         if (sourceElements) {
           for (const sourceElement of sourceElements) {
-            sourceElement.addEventListener("load", () => {
-              this.$nextTick(() => el.classList.add("loaded"));
+            sourceElement.addEventListener('load', () => {
+              this.$nextTick(() => el.classList.add('loaded'));
             });
             sourceElement.srcset = sourceElement.dataset.url;
           }
         }
       }
     },
+    
   },
   data: () => ({ observer: null, intersected: false }),
   mounted() {
     this.$nextTick(() => {
-      if (window["IntersectionObserver"]) {
+      if (window['IntersectionObserver']) {
         this.observer = new IntersectionObserver((entries) => {
           const image = entries[0];
           if (image.isIntersecting) {
@@ -99,7 +100,7 @@ export default {
       }
     });
   },
-  destroyed() {
+  unmounted() {
     this.observer.disconnect();
   },
   computed: {

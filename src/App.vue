@@ -10,8 +10,8 @@
 
 <script>
 import { RouterView } from 'vue-router';
-import AppHeader from "./components/AppHeader.vue";
-import StarField from "./effects/StarField.vue";
+import AppHeader from './components/AppHeader.vue';
+import StarField from './effects/StarField.vue';
 
 export default {
   components: {
@@ -24,7 +24,7 @@ export default {
       if (!self.createImageBitmap) return false;
 
       const webpData =
-        "data:image/webp;base64,UklGRh4AAABXRUJQVlA4TBEAAAAvAAAAAAfQ//73v/+BiOh/AAA=";
+        'data:image/webp;base64,UklGRh4AAABXRUJQVlA4TBEAAAAvAAAAAAfQ//73v/+BiOh/AAA=';
       const blob = await fetch(webpData).then((r) => r.blob());
       return createImageBitmap(blob).then(
         () => true,
@@ -34,7 +34,7 @@ export default {
   },
   mounted() {
     this.supportsWebp().then((supportsWebp) => {
-      document.body.classList.add(supportsWebp ? "webp" : "no-webp");
+      document.body.classList.add(supportsWebp ? 'webp' : 'no-webp');
     });
   },
 };
