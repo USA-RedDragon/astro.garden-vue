@@ -16,8 +16,9 @@
     "start": "npm run start:dev",
     "start:dev": "vue-cli-service serve",
     "build": "npm run build:pre && vue-cli-service build",
-    "build:ci": "vue-cli-service build",
+    "build:ci": "npm run build:pre:ci && vue-cli-service build",
     "build:pre": "node scripts/imagemin.mjs && node scripts/sitemap.mjs",
+    "build:pre:ci": "node scripts/imagemin-fake.mjs && node scripts/sitemap.mjs",
     "lint": "npm run lint:fix -- --no-fix",
     "lint:fix": "vue-cli-service lint"
   },
