@@ -60,15 +60,16 @@ body {
 }
 
 #nav {
-  padding: 30px;
+  min-width: 100%;
 }
 
-#nav a {
+#nav h2 a {
   font-weight: bold;
+  text-decoration: none;
   color: #c3c3c3;
 }
 
-#nav a.router-link-exact-active {
+#nav h2 a.router-link-exact-active {
   color: #42b983;
 }
 
