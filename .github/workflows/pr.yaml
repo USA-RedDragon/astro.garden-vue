@@ -112,7 +112,7 @@ jobs:
           check_name: Unit Tests
           job_name: Tests
 
-      - uses: codecov/codecov-action@v3
+      - uses: codecov/codecov-action@v4
         if: always()
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
@@ -157,7 +157,7 @@ jobs:
 
       - run: test:e2e:${{ matrix.browser }}
 
-      - uses: codecov/codecov-action@v3
+      - uses: codecov/codecov-action@v4
         if: always()
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
