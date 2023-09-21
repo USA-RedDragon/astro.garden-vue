@@ -79,7 +79,7 @@ export default {
         }
       }
     },
-    
+
   },
   data: () => ({ observer: null, intersected: false }),
   mounted() {
@@ -105,13 +105,13 @@ export default {
   },
   computed: {
     webpUrl() {
-      return `/gallery/generated/halfres/${this.src}.webp`
+      return `/gallery/generated/halfres/${this.src}.webp`;
     },
     jpgUrl() {
-      return `/gallery/generated/halfres/${this.src}.jpg`
+      return `/gallery/generated/halfres/${this.src}.jpg`;
     },
     pngUrl() {
-      return `/gallery/generated/fullres/${this.src}.png`
+      return `/gallery/generated/fullres/${this.src}.png`;
     },
   },
 };
