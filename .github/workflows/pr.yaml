@@ -104,22 +104,6 @@ jobs:
           check_name: Unit Tests
           job_name: Tests
 
-      - uses: codecov/codecov-action@v3
-        if: always()
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          flags: unit
-          files: ./coverage/unit/lcov.info
-          fail_ci_if_error: true
-
-      - uses: actions/upload-artifact@v3
-        if: always()
-        with:
-          name: unit-coverage
-          path: coverage/unit
-          if-no-files-found: error
-          retention-days: 30
-
   real-build:
     runs-on: ubuntu-latest
 
@@ -175,14 +159,6 @@ jobs:
       - run: npm run test:e2e:${{ matrix.browser }}
         env:
           NODE_ENV: test
-
-      - uses: codecov/codecov-action@v3
-        if: always()
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          flags: e2e-${{ matrix.browser }}
-          files: ./coverage/e2e/lcov.info
-          fail_ci_if_error: true
 
       - uses: actions/upload-artifact@v3
         if: always()
