@@ -24,7 +24,7 @@ jobs:
 
       - run: npm ci
 
-      - run: npm run build:ci
+      - run: npm run build
 
       - uses: actions/upload-artifact@v3
         with:
@@ -108,32 +108,9 @@ jobs:
           check_name: Unit Tests
           job_name: Tests
 
-  real-build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Use Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "19.7"
-
-      - run: npm ci
-
-      - run: npm run build
-
-      - uses: actions/upload-artifact@v3
-        with:
-          name: frontend-real
-          path: dist
-          if-no-files-found: error
-          retention-days: 1
-
   e2e-tests:
     runs-on: ubuntu-latest
-    needs: real-build
+    needs: build
     permissions:
       contents: read
       checks: write
@@ -157,7 +134,7 @@ jobs:
       - name: Copy built frontend
         uses: actions/download-artifact@v3
         with:
-          name: frontend-real
+          name: dist
           path: dist
 
       - run: npm run test:e2e:${{ matrix.browser }}
