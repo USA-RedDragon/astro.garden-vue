@@ -56,7 +56,7 @@
     "sass": "^1.58.3",
     "sitemap": "^7.1.1",
     "start-server-and-test": "^1.15.5",
-    "vite": "^4.1.4",
+    "vite": "^4.4.9",
     "vite-plugin-istanbul": "^4.0.0",
     "vitest": "^0.29.1"
   }
