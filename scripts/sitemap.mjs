@@ -3,10 +3,11 @@ import { Path } from 'path-parser';
 import fs from 'fs';
 import { SitemapStream, streamToPromise } from 'sitemap';
 import { Readable } from 'stream';
+import process from 'process';
 
 console.log('Generating sitemap');
 
-const stream = new SitemapStream( { hostname: 'https://astro.garden' } );
+const stream = new SitemapStream({ hostname: 'https://astro.garden' });
 const images = JSON.parse(fs.readFileSync('public/gallery/my-data.json'));
 images.push(...JSON.parse(fs.readFileSync('public/gallery/other-data.json')));
 
@@ -31,7 +32,7 @@ for (const route of routes) {
       });
     }
   } else {
-    console.error("You have URL parameters not accounted for in the sitemap");
+    console.error('You have URL parameters not accounted for in the sitemap');
     process.exit(1);
   }
 }

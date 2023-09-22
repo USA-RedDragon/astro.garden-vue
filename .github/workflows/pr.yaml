@@ -3,6 +3,10 @@ name: PR Test
 on:
   pull_request:
 
+concurrency:
+  group: '${{ github.workflow }} @ ${{ github.ref }}'
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,7 +23,8 @@ jobs:
           node-version: "19.7"
 
       - run: npm ci
-      - run: npm run build:ci
+
+      - run: npm run build
 
       - uses: actions/upload-artifact@v3
         with:
@@ -103,24 +108,9 @@ jobs:
           check_name: Unit Tests
           job_name: Tests
 
-      - uses: codecov/codecov-action@v3
-        if: always()
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          flags: unit
-          files: ./coverage/unit/lcov.info
-          fail_ci_if_error: true
-
-      - uses: actions/upload-artifact@v3
-        if: always()
-        with:
-          name: unit-coverage
-          path: coverage/unit
-          if-no-files-found: error
-          retention-days: 30
-
   e2e-tests:
     runs-on: ubuntu-latest
+    needs: build
     permissions:
       contents: read
       checks: write
@@ -141,23 +131,15 @@ jobs:
 
       - run: npm ci
 
-      - run: test:e2e:${{ matrix.browser }}
-
-      - uses: codecov/codecov-action@v3
-        if: always()
+      - name: Copy built frontend
+        uses: actions/download-artifact@v3
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          flags: e2e-${{ matrix.browser }}
-          files: ./coverage/e2e/lcov.info
-          fail_ci_if_error: true
+          name: dist
+          path: dist
 
-      - uses: actions/upload-artifact@v3
-        if: always()
-        with:
-          name: e2e-coverage-${{ matrix.browser }}
-          path: coverage/e2e
-          if-no-files-found: error
-          retention-days: 30
+      - run: npm run test:e2e:${{ matrix.browser }}
+        env:
+          NODE_ENV: test
 
       - uses: actions/upload-artifact@v3
         if: always()

@@ -28,13 +28,5 @@ export default defineConfig({
       junit: 'reports/unit/junit.xml',
       html: 'reports/unit/index.html',
     },
-    coverage: {
-      all: true,
-      enabled: true,
-      provider: 'c8',
-      reporter: ['html', 'lcov', 'text'],
-      reportsDirectory: 'coverage/unit',
-      src: ['src'],
-    },
   },
 });
