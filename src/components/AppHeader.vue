@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <h1>Astro Garden</h1>
-    <img src="@/assets/logo.png" alt="Logo" width="128" height="128" style="margin: -20px;"/>
+    <img src="../assets/logo.png" alt="Logo" width="128" height="128" style="margin: -20px;"/>
     <h6>
       Astrophotography by
       <a target="_blank" href="https://jacob.mcswain.dev">Jacob McSwain</a>

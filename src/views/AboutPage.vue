@@ -22,6 +22,6 @@
   </div>
 </template>
 <script setup>
-import meWebp from '@/assets/me.webp';
-import mePng from '@/assets/me.png';
+import meWebp from '../assets/me.webp';
+import mePng from '../assets/me.png';
 </script>

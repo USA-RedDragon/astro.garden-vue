@@ -193,7 +193,7 @@
 </template>
 
 <script setup>
-import gearJpg from '@/assets/about/gear.jpg';
+import gearJpg from '../assets/about/gear.jpg';
 </script>
 
 <style scoped>

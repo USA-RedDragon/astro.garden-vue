@@ -17,11 +17,6 @@ export default defineConfig({
       forceBuildInstrument: process.env.NODE_ENV === 'test',
     }),
   ],
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
-    },
-  },
   test: {
     reporter: ['junit', 'html', 'default'],
     outputFile: {
