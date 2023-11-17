@@ -2,6 +2,7 @@
   "name": "astro.garden",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "author": {
     "name": "Jacob McSwain",
     "email": "jacob@mcswain.dev",
