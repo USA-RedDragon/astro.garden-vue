@@ -33,7 +33,7 @@
     "axios": "^1.6.3",
     "core-js": "^3.35.0",
     "tar": "^6.2.0",
-    "vue": "^3.4.0",
+    "vue": "^3.4.2",
     "vue-router": "^4.2.5"
   },
   "devDependencies": {
