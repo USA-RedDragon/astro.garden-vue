@@ -252,14 +252,15 @@ export default {
 
 <style scoped>
 #starfield {
-  position: absolute;
-  left: 0;
-  right: 0;
+  position: fixed;
   top: 0;
+  left: 0;
   bottom: 0;
-  overflow: hidden;
+  right: 0;
+  overflow: auto;
   z-index: -1;
   width: 100%;
-  height: 100%;
+  height: auto;
+  min-height: 100%;
 }
 </style>
