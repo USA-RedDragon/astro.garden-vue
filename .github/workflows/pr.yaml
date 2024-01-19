@@ -9,7 +9,7 @@ concurrency:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     permissions:
       contents: read
 
@@ -34,7 +34,7 @@ jobs:
           retention-days: 1
 
   eslint:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     permissions:
       contents: read
       checks: write
@@ -69,7 +69,7 @@ jobs:
           path: eslint_report.json
 
   unit-tests:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     permissions:
       contents: read
       checks: write
@@ -109,7 +109,7 @@ jobs:
           job_name: Tests
 
   e2e-tests:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     needs: build
     permissions:
       contents: read
