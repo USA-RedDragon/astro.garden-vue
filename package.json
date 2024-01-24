@@ -30,7 +30,7 @@
     "lint:report": "npm run lint -- --output-file eslint_report.json --format json"
   },
   "dependencies": {
-    "axios": "^1.6.5",
+    "axios": "^1.6.6",
     "core-js": "^3.35.1",
     "tar": "^6.2.0",
     "vue": "^3.4.15",
