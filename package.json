@@ -34,7 +34,7 @@
     "core-js": "^3.35.1",
     "tar": "^6.2.0",
     "vue": "^3.4.15",
-    "vue-router": "^4.2.5"
+    "vue-router": "^4.3.0"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.7.2",
